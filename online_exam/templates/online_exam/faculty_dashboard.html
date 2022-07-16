@@ -63,9 +63,9 @@ desired effect
     <!-- Logo -->
     <a href="http://www.iiits.ac.in" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b><img src="{% static "logo.png" %}" alt="My image" style="width:45px;height:45px;"></b></span>
+      <span class="logo-mini"><b><img src="{% static "logo2.png" %}" alt="My image" style="width:45px;height:45px;"></b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
+      <span class="logo-lg"><b><img src="{% static "logo2.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
     </a>
 
     <!-- Header Navbar -->
@@ -122,7 +122,7 @@ desired effect
           <img src="{% static "teacher-icon.png" %}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Faculty Portal</p>
+          <p>Teacher's Portal</p>
         </div>
       </div>
 
@@ -292,7 +292,7 @@ desired effect
           </div>
         </div>
         <!-- ./col -->
-        
+
 
         <div class = "row">
           <div class="col-lg-5">
@@ -338,11 +338,11 @@ desired effect
 
     var data = google.visualization.arrayToDataTable([
       ['Examination', 'Users Registered'],
-      
+
       {% for i in registrations %}
       ["{{i.exam_name}}", {{i.count}}],
       {% endfor %}
-      
+
     ]);
 
     var options = {
@@ -357,19 +357,19 @@ desired effect
 <script>
     google.charts.load('current', {packages: ['corechart', 'bar']});
     google.charts.setOnLoadCallback(drawMultSeries);
-    
+
     function drawMultSeries() {
           var data = new google.visualization.DataTable();
           data.addColumn('date', 'Month');
           data.addColumn('number', 'Users Registered');
-    
+
           data.addRows([
             {% for i in dataArray %}
-            
+
               [ new Date("{{i.year}}", "{{i.month}}", 1), {{i.count}}],
             {% endfor %}
           ]);
-    
+
           var options = {
             title: 'Users Registered per Month',
             hAxis: {
@@ -380,10 +380,10 @@ desired effect
               title: 'Number of users registered'
             }
           };
-    
+
           var chart = new google.visualization.ColumnChart(
             document.getElementById('chart_div'));
-    
+
           chart.draw(data, options);
         }
 </script>

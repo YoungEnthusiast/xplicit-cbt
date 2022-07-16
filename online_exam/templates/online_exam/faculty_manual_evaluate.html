@@ -69,12 +69,12 @@ desired effect
   <!-- Main Header -->
   <header class="main-header">
 
-    <!-- Logo -->
-    <a href="http://www.iiits.ac.in" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b><img src="{% static "logo.png" %}" alt="My image" style="width:45px;height:45px;"></b></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
+    <!-- logo2 -->
+    <a href="http://www.iiits.ac.in" class="logo2">
+      <!-- mini logo2 for sidebar mini 50x50 pixels -->
+
+      <!-- logo2 for regular state and mobile devices -->
+      <span class="logo2-lg"><b><img src="{% static "logo2.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
     </a>
 
      <!-- Header Navbar -->
@@ -119,7 +119,7 @@ desired effect
       </div>
     </nav>
   </header>
-  <!-- Left side column. contains the logo and sidebar -->
+  <!-- Left side column. contains the logo2 and sidebar -->
   <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
@@ -226,7 +226,7 @@ desired effect
     <section class="content-header">
         <h1>
             Evaluation
-            
+
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-gears"></i> Management</a></li>
@@ -303,7 +303,7 @@ desired effect
          text += "<select class='btn btn-danger btn-xs disabled'>";
          text += "<option value='0' selected = 'selected'>Wrong</option>";
        }
-     } 
+     }
      else if(input_data[i]['verify'] != "1")
      {
        text += "<select class='btn btn-warning btn-xs changeAnsStatus'>";
@@ -341,7 +341,7 @@ desired effect
     if(start == true)
     {
       order = Table.order();
-    } 
+    }
     Table = $('#example').DataTable( {
         "destroy": true,
         "order": order,

@@ -68,12 +68,12 @@ desired effect
   <!-- Main Header -->
   <header class="main-header">
 
-    <!-- Logo -->
-    <a href="http://www.iiits.ac.in" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b><img src="{% static "logo.png" %}" alt="My image" style="width:45px;height:45px;"></b></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
+    <!-- logo2 -->
+    <a href="http://www.iiits.ac.in" class="logo2">
+      <!-- mini logo2 for sidebar mini 50x50 pixels -->
+      
+      <!-- logo2 for regular state and mobile devices -->
+      <span class="logo2-lg"><b><img src="{% static "logo2.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
     </a>
 
      <!-- Header Navbar -->
@@ -118,7 +118,7 @@ desired effect
       </div>
     </nav>
   </header>
-  <!-- Left side column. contains the logo and sidebar -->
+  <!-- Left side column. contains the logo2 and sidebar -->
   <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
@@ -179,7 +179,7 @@ desired effect
                       <th>Answer Key</th>
               </tr>
           </thead>
-          <tbody>  
+          <tbody>
             {% for i in registrations %}
               <tr><td>{{i.exam_name}}</td><td>{{i.attempt_no}}</td><td>{{i.course}}</td><td>{{i.year}}</td><td>{{i.score}}</td><td>
               {% if i.verify == 1 %}

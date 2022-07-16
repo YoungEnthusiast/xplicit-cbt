@@ -61,12 +61,12 @@ desired effect
   <!-- Main Header -->
   <header class="main-header">
 
-    <!-- Logo -->
-    <a href="http://www.iiits.ac.in" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b><img src="{% static "logo.png" %}" alt="My image" style="width:45px;height:45px;"></b></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
+    <!-- logo2 -->
+    <a href="http://www.iiits.ac.in" class="logo2">
+      <!-- mini logo2 for sidebar mini 50x50 pixels -->
+      <span class="logo2-mini"><b><img src="{% static "logo2.png" %}" alt="My image" style="width:45px;height:45px;"></b></span>
+      <!-- logo2 for regular state and mobile devices -->
+      <span class="logo2-lg"><b><img src="{% static "logo2.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
     </a>
 
      <!-- Header Navbar -->
@@ -111,7 +111,7 @@ desired effect
       </div>
     </nav>
   </header>
-  <!-- Left side column. contains the logo and sidebar -->
+  <!-- Left side column. contains the logo2 and sidebar -->
   <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
@@ -257,7 +257,7 @@ desired effect
                   <div class="col-sm-6">
                     <select class="form-control" name="course" id = "course" required>
                     <option disabled selected value>Course</option>
-                      {% for i in courses %}      
+                      {% for i in courses %}
                       <option value = "{{i.id}}">{{i.course_name}}</option>
                       {% endfor %}
                     </select>
@@ -265,6 +265,9 @@ desired effect
                   <div class="col-sm-6">
                     <select class="form-control" name="exam" id = "exam" required>
                     <option disabled selected value>Examination</option>
+                    {% for i in exams %}
+                    <option value = "{{i.id}}">{{i.exam_name}}</option>
+                    {% endfor %}
                     </select>
                   </div>
                 </div>
@@ -280,6 +283,9 @@ desired effect
                   <div class="col-sm-6">
                     <select class="form-control" name="subtopic" id = "subtopic" required>
                     <option disabled selected value>Subtopic</option>
+                      {% for i in subtopics %}
+                        <option value = "{{i.id}}">{{i.subtopic_name}}</option>
+                      {% endfor %}
                     </select>
                   </div>
                 </div><div class="form-group">
@@ -339,17 +345,17 @@ desired effect
                   <div class="col-sm-6"></div>
               </div>-->
               <div class = "container" id = "question" style="width:100%">
-                  
+
               </div>
               <div class = "container" id = "out" style="width:100%">
-                  
+
               </div>
-                  
-            
-                    
-                  
-              
-              
+
+
+
+
+
+
               <!--<div id="my_div"></div>
                       <script type="text/javascript">
                       function myFunction(){
@@ -391,7 +397,7 @@ desired effect
 <script>
   $(document).ready(function(){
     createQuestion();
-    
+
   });
   $("#type").change(function(){
       createQuestion();
@@ -414,7 +420,7 @@ function changeExam(){
       default_option.setAttribute("disabled", true);
       list.add(default_option);
       for (obj in options)
-      {  
+      {
         list.add(new Option(options[obj], obj));
       }
       //console.log(JSON.parse(data));
@@ -460,7 +466,7 @@ function changeExam(){
         default_option.setAttribute("disabled", true);
         list.add(default_option);
         for (obj in options)
-        {  
+        {
           list.add(new Option(options[obj], obj));
         }
         //console.log(JSON.parse(data));
@@ -496,15 +502,15 @@ function changeExam(){
           text += "<div class = 'row'><div class= 'col-lg-12'><textarea name = 'description' class='form-control' rows=3 style='width:100%;font-weight:bold;margin-left:10px' placeholder='Enter your description here' required></textarea><br><br></div></div>"
           if(a == "Multiple Choice Single Answer")
           {
-              text += "<div class = 'row'><div class= 'col-lg-12'><span style='font-weight:200;margin-left:10px'><h5>Enter the no. of options:</h5></span></div></div><div class = 'row'><div class= 'col-lg-12'><select class='form-control' name=options_number id='in' onchange='optionsMCQ()' required><option value = ''>Select</option><option value = '2'>2</option><option value = '3'>3</option><option value = '4'>4</option><option value = '5'>5</option><option value = '6'>6</option><option value = '7'>7</option><option value = '8'>8</option><option value = '9'>9</option><option value = '10'>10</option></select></div></div>";                                    
+              text += "<div class = 'row'><div class= 'col-lg-12'><span style='font-weight:200;margin-left:10px'><h5>Enter the no. of options:</h5></span></div></div><div class = 'row'><div class= 'col-lg-12'><select class='form-control' name=options_number id='in' onchange='optionsMCQ()' required><option value = ''>Select</option><option value = '2'>2</option><option value = '3'>3</option><option value = '4'>4</option><option value = '5'>5</option><option value = '6'>6</option><option value = '7'>7</option><option value = '8'>8</option><option value = '9'>9</option><option value = '10'>10</option></select></div></div>";
           }
           else if(a == "Multiple Choice Multiple Answer")
           {
-            text += "<div class = 'row'><div class= 'col-lg-12'><span style='font-weight:200;margin-left:10px'><h5>Enter the no. of options:</h5></span></div></div><div class = 'row'><div class= 'col-lg-12'><select class='form-control' name=options_number id='in' onchange='optionsMCMQ()' required><option value = ''>Select</option><option value = '2'>2</option><option value = '3'>3</option><option value = '4'>4</option><option value = '5'>5</option><option value = '6'>6</option><option value = '7'>7</option><option value = '8'>8</option><option value = '9'>9</option><option value = '10'>10</option></select></div></div>";                                    
+            text += "<div class = 'row'><div class= 'col-lg-12'><span style='font-weight:200;margin-left:10px'><h5>Enter the no. of options:</h5></span></div></div><div class = 'row'><div class= 'col-lg-12'><select class='form-control' name=options_number id='in' onchange='optionsMCMQ()' required><option value = ''>Select</option><option value = '2'>2</option><option value = '3'>3</option><option value = '4'>4</option><option value = '5'>5</option><option value = '6'>6</option><option value = '7'>7</option><option value = '8'>8</option><option value = '9'>9</option><option value = '10'>10</option></select></div></div>";
           }
           else if(a =="Match the Column")
           {
-            text += "<div class = 'row'><div class= 'col-lg-12'><span style='font-weight:200;margin-left:10px'><h5>Enter the no. of questions:</h5></span></div></div><div class = 'row'><div class= 'col-lg-12'><select class='form-control' name=questions_number id='in' onchange='MTC()' required><option value = ''>Select</option><option value = '2'>2</option><option value = '3'>3</option><option value = '4'>4</option><option value = '5'>5</option><option value = '6'>6</option><option value = '7'>7</option><option value = '8'>8</option><option value = '9'>9</option><option value = '10'>10</option></select></div></div>";                                    
+            text += "<div class = 'row'><div class= 'col-lg-12'><span style='font-weight:200;margin-left:10px'><h5>Enter the no. of questions:</h5></span></div></div><div class = 'row'><div class= 'col-lg-12'><select class='form-control' name=questions_number id='in' onchange='MTC()' required><option value = ''>Select</option><option value = '2'>2</option><option value = '3'>3</option><option value = '4'>4</option><option value = '5'>5</option><option value = '6'>6</option><option value = '7'>7</option><option value = '8'>8</option><option value = '9'>9</option><option value = '10'>10</option></select></div></div>";
           }
           else if(a == "Short Answer"||a=="Long Answer")
           {
@@ -528,8 +534,8 @@ function changeExam(){
         text = '<div class="row form-group"><div class="col-lg-1"><strong>Option no.</strong></div><div class="col-lg-5"><strong>Option value</strong></div><div class="col-lg-2"><strong>Select the correct answer</strong></div></div>';
         a = document.getElementById('in').value;
         for(i = 1; i <= a; i++)
-        {	
-            text += '<div class="row form-group"><div class = "col-lg-1">' + String.fromCharCode(96 + i) + ')</div><div class="col-lg-5"><input type = text class = "form-control" name = option' + i +' required></div><div class="col-lg-2"><input type="radio" name = "options" value = ' + i + ' required></div></div>';			
+        {
+            text += '<div class="row form-group"><div class = "col-lg-1">' + String.fromCharCode(96 + i) + ')</div><div class="col-lg-5"><input type = text class = "form-control" name = option' + i +' required></div><div class="col-lg-2"><input type="radio" name = "options" value = ' + i + ' required></div></div>';
         }
       }
       document.getElementById('out').innerHTML = text;
@@ -542,8 +548,8 @@ function changeExam(){
       var text = '<div class="row form-group"><div class="col-lg-1"><strong>Option no.</strong></div><div class="col-lg-5"><strong>Option value</strong></div><div class="col-lg-2"><strong>Select the correct answers</strong></div></div>';
       a = document.getElementById('in').value;
       for(i = 1; i <= a; i++)
-      {	
-          text += '<div class="row form-group"><div class = "col-lg-1">' + String.fromCharCode(96 + i) + ')</div><div class="col-lg-5"><input type = text class = "form-control" name = option' + i +' required></div><div class="col-lg-2"><input type="checkbox" name = "options[]" value = ' + i + ' id = option' + i +'></div></div>';			
+      {
+          text += '<div class="row form-group"><div class = "col-lg-1">' + String.fromCharCode(96 + i) + ')</div><div class="col-lg-5"><input type = text class = "form-control" name = option' + i +' required></div><div class="col-lg-2"><input type="checkbox" name = "options[]" value = ' + i + ' id = option' + i +'></div></div>';
       }
       document.getElementById('out').innerHTML = text;
     }
@@ -556,8 +562,8 @@ function changeExam(){
       var text = '<div class="row form-group"><div class="col-lg-1"><strong>Question no.</strong></div><div class="col-lg-5"><strong>Question</strong></div><div class="col-lg-1"><strong>S no.</strong></div><div class="col-lg-5"><strong>Answer</strong></div></div>';
       a = document.getElementById('in').value;
       for(i = 1; i <= a; i++)
-      {	
-          text += '<div class="row form-group"><div class = "col-lg-1">' + String.fromCharCode(96 + i) + ')</div><div class="col-lg-5"><input type = text class = "form-control" name = matchQues' + i +' required></div><div class="col-lg-1">'+ i +')</div><div class="col-lg-5"><input type = text class = "form-control" name = matchAns' + i +' required></div></div>';			
+      {
+          text += '<div class="row form-group"><div class = "col-lg-1">' + String.fromCharCode(96 + i) + ')</div><div class="col-lg-5"><input type = text class = "form-control" name = matchQues' + i +' required></div><div class="col-lg-1">'+ i +')</div><div class="col-lg-5"><input type = text class = "form-control" name = matchAns' + i +' required></div></div>';
       }
       document.getElementById('out').innerHTML = text;
     }

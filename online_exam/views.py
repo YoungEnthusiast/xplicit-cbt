@@ -9,7 +9,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from django.db.models import Sum
-import requests
+# import requests
 from .models import course, user, topic, subtopic, question_type, level, exam_detail, question_bank,  option, answer, registration, result, MatchTheColumns
 
 def faculty_dashboard(request):
@@ -83,7 +83,9 @@ def faculty_add_course(request):
 @csrf_exempt
 def faculty_add_exam(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
-        if(request.POST.get('exam_name', False) != False and request.POST.get('description', False) != False and request.POST.get('course_id', False) != False and request.POST.get('year', False) != False and request.POST.get('status', False) != False and request.POST.get('startDate', False) != False and request.POST.get('endDate', False) != False and request.POST.get('startTime', False) != False and request.POST.get('endTime', False) != False and request.POST.get('pass_percentage', False) != False and request.POST.get('no_of_questions', False) != False and request.POST.get('attempts_allowed', False) != False):
+        if(request.POST.get('exam_name', False) != False and request.POST.get('description', False) != False and request.POST.get('course_id', False) != False and request.POST.get('year', False) != False and request.POST.get('status', False) != False
+        and request.POST.get('startDate', False) != False and request.POST.get('endDate', False) != False and request.POST.get('startTime', False) != False and request.POST.get('endTime', False) != False and request.POST.get('pass_percentage', False) != False
+        and request.POST.get('no_of_questions', False) != False and request.POST.get('attempts_allowed', False) != False):
             temp = exam_detail()
             temp.exam_name = request.POST['exam_name']
             temp.description = request.POST['description']
@@ -159,7 +161,7 @@ def faculty_add_question(request):
         print(request.POST.get("status", False))"""
         if(request.method == "POST" and request.POST.get("question", False) != False and request.POST.get("description", False) != False and request.POST.get("question_type", False) != False and request.POST.get("subtopic", False) != False and request.POST.get("level", False) != False and request.POST.get("exam", False) != False and request.POST.get("score", False) != False and request.POST.get("status", False) != False):
             temp = question_bank()
-            temp.question =request.POST["question"] 
+            temp.question =request.POST["question"]
             temp.description = request.POST["description"]
             temp.question_type = question_type.objects.get(pk=request.POST["question_type"])
             temp.subtopic_id = subtopic.objects.get(pk = request.POST["subtopic"])
@@ -204,12 +206,12 @@ def faculty_add_question(request):
                     temp_answer.answer = request.POST['answer']
                     temp_answer.save()
                 message = "Question was successfully created!!"
-                return render(request ,'online_exam/faculty_add_question.html',  {"courses": course.objects.all(), "topics": topic.objects.all(), "levels": level.objects.all(), "question_type":question_type.objects.all(), "message":message})
+                return render(request ,'online_exam/faculty_add_question.html',  {"courses": course.objects.all(), "exams": exam_detail.objects.all(), "topics": topic.objects.all(), "subtopics": subtopic.objects.all(), "levels": level.objects.all(), "question_type":question_type.objects.all(), "message":message})
             else:
                 wrong_message = "Sorry, question already exists under the subtopic!!"
-                return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.all(), "topics": topic.objects.all(), "levels": level.objects.all(), "question_type":question_type.objects.all(), "wrong_message":wrong_message})   
+                return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.all(), "exams": exam_detail.objects.all(), "topics": topic.objects.all(), "subtopics": subtopic.objects.all(), "levels": level.objects.all(), "question_type":question_type.objects.all(), "wrong_message":wrong_message})
         else:
-            return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.all(), "topics": topic.objects.all(), "levels": level.objects.all(), "question_type":question_type.objects.all()})
+            return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.all(), "exams": exam_detail.objects.all(), "topics": topic.objects.all(), "subtopics": subtopic.objects.all(), "levels": level.objects.all(), "question_type":question_type.objects.all()})
     else:
         return redirect("../login")
 
@@ -330,7 +332,7 @@ def faculty_modify_question(request):
         if(request.method == "POST" and request.POST.get("id", False) != False and request.POST.get("question", False) != False and request.POST.get("description", False) != False and request.POST.get("question_type", False) != False and request.POST.get("subtopic", False) != False and request.POST.get("level", False) != False and request.POST.get("exam", False) != False and request.POST.get("score", False) != False and request.POST.get("status", False) != False):
             temp = question_bank()
             id = request.POST["id"]
-            temp.question =request.POST["question"] 
+            temp.question =request.POST["question"]
             temp.description = request.POST["description"]
             temp.question_type = question_type.objects.get(pk=request.POST["question_type"])
             temp.subtopic_id = subtopic.objects.get(pk = request.POST["subtopic"])
@@ -473,7 +475,7 @@ def faculty_update_question(request):
                     if answer.objects.filter(question_id = query, answer = i.option_no).count() == 1:
                         ques['options'].append({"option_desig":chr(i.option_no+96), "option_no":i.option_no, "option_value":i.option_value, "answer": 1})
                     elif answer.objects.filter(question_id = query, answer = i.option_no).count() == 0:
-                        ques['options'].append({"option_desig":chr(i.option_no+96), "option_no":i.option_no, "option_value":i.option_value, "answer": 0})               
+                        ques['options'].append({"option_desig":chr(i.option_no+96), "option_no":i.option_no, "option_value":i.option_value, "answer": 0})
                 ques['options_number'] = option.objects.filter(question_id = query).count()
             elif(ques['question_type'] == "Match the Column"):
                 ques['answers'] = []
@@ -563,7 +565,7 @@ def faculty_view_questions(request):
                 for j in MatchTheColumns.objects.filter(question_id = i).all():
                     A['answers'] += j.question + " - " + j.answer + "; "
             else:
-                A['options'] = "None" 
+                A['options'] = "None"
                 A['answers'] = answer.objects.get(question_id = i).answer
             A['level'] = i.level_id.level_name
             A['exam'] = i.exam_id.exam_name
@@ -626,7 +628,7 @@ def faculty_exam_registrations(request):
 def modify_user(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
         if(request.method=='POST'):
-            if(request.POST.get('user_id', False) != False and request.POST.get('first_name', False) == False and request.POST.get('password', False) == False): 
+            if(request.POST.get('user_id', False) != False and request.POST.get('first_name', False) == False and request.POST.get('password', False) == False):
                 temp=user.objects.get(pk=int(request.POST['user_id']))
                 currentUser = user()
                 currentUser.first_name = temp.first_name
@@ -715,7 +717,7 @@ def faculty_register_evaluate(request):
 def faculty_manual_evaluate(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
         if request.method == "POST":
-            if request.POST.get('result_id', False) != False and request.POST.get('check', False) != False and request.POST.get('score', False) != False: 
+            if request.POST.get('result_id', False) != False and request.POST.get('check', False) != False and request.POST.get('score', False) != False:
                 if(int(request.POST['check']) == 1):
                     result.objects.filter(pk = int(request.POST['result_id'])).update(score = int(request.POST['score']), verify = 1)
                 elif(int(request.POST['check']) == 0):
@@ -744,7 +746,7 @@ def faculty_manual_evaluate(request):
                         subdata['answer'] = ""
                         for j in MatchTheColumns.objects.filter(question_id = i.question_id).all():
                             subdata['answer'] += j.question + " - " + j.answer + "; "
-                    else: 
+                    else:
                         subdata['answer'] = answer.objects.get(question_id = i.question_id).answer
                     subdata['level'] = i.question_id.level_id.level_name
                     subdata['score'] = i.question_id.score
@@ -779,7 +781,7 @@ def faculty_manual_evaluate(request):
                     subdata['answer'] = ""
                     for j in MatchTheColumns.objects.filter(question_id = i.question_id).all():
                         subdata['answer'] += j.question + " - " + j.answer + "; "
-                else: 
+                else:
                     subdata['answer'] = answer.objects.get(question_id = i.question_id).answer
                 subdata['level'] = i.question_id.level_id.level_name
                 subdata['score'] = i.question_id.score
@@ -934,11 +936,11 @@ def student_attempt_exam(request):
                 L['mtcQuestions'] = dict()
                 L['mtcAnswers'] = dict()
                 for l in MatchTheColumns.objects.filter(question_id = i).all():
-                    L['mtcQuestions'][m] = l.question    
+                    L['mtcQuestions'][m] = l.question
                     m += 1
                 m = 1
                 for l in MatchTheColumns.objects.filter(question_id = i).order_by('?').all():
-                    L['mtcAnswers'][m] = l.answer    
+                    L['mtcAnswers'][m] = l.answer
                     m += 1
             L['level'] = i.level_id.level_name
             L['subtopic'] = i.subtopic_id.subtopic_name
@@ -951,7 +953,7 @@ def student_attempt_exam(request):
             K[j] = L
         final = json.dumps(K)
         a = datetime.datetime.now()
-        b = datetime.datetime(i.exam_id.end_time.year,i.exam_id.end_time.month,i.exam_id.end_time.day,i.exam_id.end_time.hour,i.exam_id.end_time.minute,i.exam_id.end_time.second)
+        b = datetime.datetime(i.exam_id.end_time.year,i.exam_id.end_time.month,i.exam_id.end_time.day,i.exam_id.end_time.hour + 1,i.exam_id.end_time.minute,i.exam_id.end_time.second)
         seconds = math.floor((b-a).total_seconds())
         return render(request, 'online_exam/student_attempt_exam.html', {"myArray":final, "sizeMyArray":j, "exam_id":exam_id, "registration_id":registration_id, "seconds": seconds})
     else:
@@ -959,7 +961,7 @@ def student_attempt_exam(request):
 def student_approved_exams(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1):
         Final = []
-        for i in registration.objects.filter(user_id = user.objects.get(pk = int(request.session['id'])), registered = 1): 
+        for i in registration.objects.filter(user_id = user.objects.get(pk = int(request.session['id'])), registered = 1):
             exams = dict()
             exams["registration_id"] = i.id
             exams["exam_id"] = i.exam_id.id
@@ -978,7 +980,7 @@ def student_approved_exams(request):
             else:
                 exams["attemptable"] = 0
             Final.append(exams)
-        return render(request, 'online_exam/student_approved_exams.html', {"exams":Final, "current_time":datetime.datetime.now()}) 
+        return render(request, 'online_exam/student_approved_exams.html', {"exams":Final, "current_time":datetime.datetime.now()})
     else:
         return redirect("../login")
 
@@ -1035,8 +1037,10 @@ def student_verify(request):
                 temp.answer = temp.answer['1']
                 temp.score = 0
                 temp.verify = 0
-                temp.save()                 
-        return HttpResponse(marks)
+                temp.save()
+        return redirect("sign_out")
+        #return HttpResponse(marks)
+
     else:
         return redirect("../login")
 
@@ -1090,7 +1094,7 @@ def student_answer_key(request):
                 subdata['answer'] = ""
                 for j in MatchTheColumns.objects.filter(question_id = i.question_id).all():
                     subdata['answer'] += j.question + " - " + j.answer + "; "
-            else: 
+            else:
                 subdata['answer'] = answer.objects.get(question_id = i.question_id).answer
             subdata['level'] = i.question_id.level_id.level_name
             subdata['score'] = i.question_id.score
@@ -1176,7 +1180,7 @@ def authenticate(request, token=None):
     clientSecret = "1c616e2f378f9aa90c936b1560e6d0c372fa5e5a54457356f39573955e7e64b445d2f03673a8905088b43c114465020825f48b79e8ce85b0e20e6ad8b736e860"
     Payload = { 'token': token, 'secret': clientSecret }
     k = requests.post("https://serene-wildwood-35121.herokuapp.com/oauth/getDetails", Payload)
-    data = json.loads(k.content) 
+    data = json.loads(k.content)
     print(data['student'][0]['Student_Email'])
     user_email = data['student'][0]['Student_Email']
     if(user.objects.filter(email=user_email).exists() == False):

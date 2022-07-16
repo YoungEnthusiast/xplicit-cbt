@@ -1360,6 +1360,11 @@ a.text-info:focus {
 .text-warning {
   color: #8a6d3b;
 }
+
+.text-xplicit-orange {
+  color: #EE8133;
+}
+
 a.text-warning:hover,
 a.text-warning:focus {
   color: #66512c;
@@ -1396,6 +1401,11 @@ a.bg-info:focus {
 .bg-warning {
   background-color: #fcf8e3;
 }
+
+.bg-xplicit-orange {
+  background-color: #EE8133;
+}
+
 a.bg-warning:hover,
 a.bg-warning:focus {
   background-color: #f7ecb5;
@@ -3289,6 +3299,14 @@ fieldset[disabled] .btn-info.focus {
   background-color: #f0ad4e;
   border-color: #eea236;
 }
+
+.btn-xplicit-orange {
+  color: #fff;
+  background-color: #EE8133;
+  border-color: #eea236;
+}
+
+
 .btn-warning:focus,
 .btn-warning.focus {
   color: #fff;

@@ -43,9 +43,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             border-radius: 100%;
             cursor: pointer;
           }
-          
+
           /* Style the active class (and buttons on mouse-over) */
-  
+
           .answered{
             background-color:green;
             border-radius:100%;
@@ -144,12 +144,12 @@ desired effect
   <!-- Main Header -->
   <header class="main-header">
 
-    <!-- Logo -->
-    <a href="http://www.iiits.ac.in" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b><img src="{% static "logo.png" %}" alt="My image" style="width:45px;height:45px;"></b></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
+    <!-- logo2 -->
+    <a href="http://www.iiits.ac.in" class="logo2">
+      <!-- mini logo2 for sidebar mini 50x50 pixels -->
+
+      <!-- logo2 for regular state and mobile devices -->
+      <span class="logo2-lg"><b><img src="{% static "logo2.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
     </a>
 
      <!-- Header Navbar -->
@@ -194,7 +194,7 @@ desired effect
       </div>
     </nav>
   </header>
-  <!-- Left side column. contains the logo and sidebar -->
+  <!-- Left side column. contains the logo2 and sidebar -->
   <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
@@ -251,14 +251,14 @@ desired effect
             <h3 class="box-title" style="float:right" id = 'countdown'></h3>
           </div>
           <div class="box-body" id="score" style="height:450px">
-            <div class="form-group inline-form" id = "subject"> 
+            <div class="form-group inline-form" id = "subject">
             </div>
             <div class="form-group inline-form" style="float:right">
               <button class = "btn btn-warning" onclick="review();">Review Later</button>
             </div>
-            <div class="form-group inline-form" id = "Ques"> 
+            <div class="form-group inline-form" id = "Ques">
             </div>
-            <div class="form-group inline-form" id = "Ans"> 
+            <div class="form-group inline-form" id = "Ans">
             </div>
           </div>
           <div class="box-footer with-border" id="navig-footer">
@@ -311,7 +311,7 @@ desired effect
         data[i-1] = received[i];
         data[i-1]['review'] = false;
         answer[i-1] = {'question_id':data[i-1]['question_id'], 'answers':{}, 'score':data[i-1]['score']};
-      } 
+      }
       console.log(data);
       console.log(answer);
       sessionStorage.setItem('exam_id', {{exam_id}});
@@ -325,7 +325,7 @@ desired effect
     var data = JSON.parse(sessionStorage.getItem('question'));
     var answer = JSON.parse(sessionStorage.getItem('answer'));
     var value = sessionStorage.getItem('value');
-  }        
+  }
   $(document).ready(function()
       {
         var text = "";
@@ -358,34 +358,34 @@ desired effect
           {
             text += ' answered';
           }
-          text += '">'+ i +'</button>'; 
+          text += '">'+ i +'</button>';
         }
         text += '<button class="nav-page" id="next">></button>';
         text += '<button class="nav-page" id="next_page">>></button>';
         document.getElementById("myDIV").innerHTML = text;
       });
       var seconds;
-      if(sessionStorage.getItem('seconds') == null)
-      {
+      // if(sessionStorage.getItem('seconds') == null)
+      // {
         seconds = {{seconds}};
-      }
-      else
-      {
-        seconds = sessionStorage.getItem('seconds');
-      }
+      // }
+      // else
+      // {
+      //   seconds = sessionStorage.getItem('seconds');
+      // }
       function timer() {
           var hours       = Math.floor(seconds/3600);
           var minutesLeft = Math.floor((seconds) - (hours*3600));
           var minutes     = Math.floor(minutesLeft/60);
           var remainingSeconds = seconds % 60;
           if (remainingSeconds < 10) {
-              remainingSeconds = "0" + remainingSeconds; 
+              remainingSeconds = "0" + remainingSeconds;
           }
           if (minutes < 10) {
-            minutes = "0" + minutes; 
+            minutes = "0" + minutes;
         }
         if (hours < 10) {
-          hours = "0" + hours; 
+          hours = "0" + hours;
         }
           document.getElementById('countdown').innerHTML = hours + ":" + minutes + ":" + remainingSeconds;
           if (seconds == 1) {
@@ -464,7 +464,7 @@ desired effect
                 text += '<button class="nav-page" id="next">></button>';
                 text += '<button class="nav-page" id="next_page">>></button>';
                 document.getElementById("myDIV").innerHTML = text;
-              }  
+              }
             }
           });
           $("#myDIV").on('click', '#previous',function()
@@ -561,7 +561,7 @@ desired effect
               text += '<button class="nav-page" id="next">></button>';
               text += '<button class="nav-page" id="next_page">>></button>';
               document.getElementById("myDIV").innerHTML = text;
-            }    
+            }
           });
           $("#myDIV").on('click', '#previous_page',function()
           {
@@ -726,7 +726,7 @@ desired effect
                     {
                       text +=  ("<option value = '"+data[question]['mtcAnswers'][answerKey]+"'> <strong>"+ answerKey +") "+ data[question]['mtcAnswers'][answerKey] + "</strong></option>");
                     }
-                  } 
+                  }
                 }
                 else
                 {
@@ -734,7 +734,7 @@ desired effect
                   {
                     text +=  ("<option value = '"+data[question]['mtcAnswers'][answerKey]+"'> <strong>"+ answerKey +") "+ data[question]['mtcAnswers'][answerKey] + "</strong></option>");
                   }
-                } 
+                }
                 text += "</select><br>";
               }
             }
@@ -749,7 +749,7 @@ desired effect
                 text += '<textarea name="answer" class="form-control textarea" rows="9" style="width:100%;font-weight:bold;margin-left:10px" placeholder="Enter your answer here" required=""></textarea>';
               }
             }
-            document.getElementById('Ans').innerHTML = text; 
+            document.getElementById('Ans').innerHTML = text;
             document.getElementById("exam_name").innerHTML = data[question]['exam'];
             document.getElementById("exam_nav").innerHTML = data[question]['exam'];
             //document.getElementById("subject").innerHTML = "<span style='font-size:18px'>Subject:&nbsp;</span><span style='font-size:16px'>" + data[question]['subject'] + "</span>";
@@ -764,7 +764,7 @@ desired effect
               success:function(data){
                 sessionStorage.clear();
                 text = "";
-                text +="<h4>You have scored "+data+" marks.</h4>";
+                text +="<h4>"+data+" marks.</h4>";
                 text +="<h5>Note: Only Multiple Choice answers and Match the Column have been corrected. The rest of the questions will be manually examined by the examiner and will be notified to you soon.</h5>";
                 text +="<br><a href='../student_exams'><button class='btn btn-primary'>Go to Examination Section</button></a>";
                 document.getElementById("score").innerHTML = text;

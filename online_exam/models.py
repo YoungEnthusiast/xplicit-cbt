@@ -25,7 +25,8 @@ class user(models.Model):
     created = models.DateTimeField(default = timezone.now)
     modified = models.DateTimeField(default = timezone.now)
     def __str__(self):
-        return str(self.id) + "; " + str(self.first_name) + "; " + str(self.last_name) + "; " + str(self.phone) + "; " + str(self.email) + "; " + str(self.password) + "; " + str(self.account_type) + "; " + str(self.status) + "; " + str(self.created) + "; " + str(self.modified)
+        return str(self.id) + " | " + str(self.first_name) + " " + str(self.last_name) + " | " + str(self.email)
+        #return str(self.id) + "; " + str(self.first_name) + "; " + str(self.last_name) + "; " + str(self.phone) + "; " + str(self.email) + "; " + str(self.password) + "; " + str(self.account_type) + "; " + str(self.status) + "; " + str(self.created) + "; " + str(self.modified)
 
 class level(models.Model):
     level_name = models.CharField(default = "", max_length = 100)
@@ -41,7 +42,7 @@ class topic(models.Model):
     modified = models.DateTimeField(default = timezone.now)
     def __str__(self):
         return str(self.id) + "; " + str(self.topic_name) + "; " + str(self.description) + "; " + str(self.status) + "; " + str(self.created) + "; " + str(self.modified)
-    
+
 class subtopic(models.Model):
     subtopic_name = models.CharField(default = "", max_length = 100)
     description = models.TextField(null="True", blank=True)
@@ -104,8 +105,8 @@ class result(models.Model):
     answer = models.TextField(null="True", blank=True)
     score = models.FloatField()
     verify = models.IntegerField(default = 0)
-    def __str__(self):  
-        return str(self.id) + "; " + str(self.registration_id) + "; " + str(self.question_id) + "; " + str(self.answer) + "; " + str(self.score) + "; " + str(self.verify) 
+    def __str__(self):
+        return str(self.id) + "; " + str(self.registration_id) + "; " + str(self.question_id) + "; " + str(self.answer) + "; " + str(self.score) + "; " + str(self.verify)
 
 class option(models.Model):
     question_id = models.ForeignKey(question_bank, on_delete=models.CASCADE)
