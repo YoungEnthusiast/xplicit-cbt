@@ -54,7 +54,7 @@ desired effect
       <!-- mini logo2 for sidebar mini 50x50 pixels -->
 
       <!-- logo2 for regular state and mobile devices -->
-      <span class="logo2-lg"><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> <strong class="text-xplicit-orange">Xplicit Digital Solutions</strong> </span>
+      <span class="logo2-lg"><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> <strong class="text-xplicit-orange">Xplicit Solutions</strong> </span>
     </a>
 
      <!-- Header Navbar -->
@@ -124,19 +124,25 @@ desired effect
         <li><a href="../student_exams"><i class="fa fa-clipboard"></i> <span>Examinations</span></a></li>
         <li><a href="../student_progress"><i class="fa fa-bar-chart"></i> <span>Progress</span></a></li>
         <li><a href="../student_profile"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-        <li><a href="../sign_out"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+        <!-- <li><a href="../sign_out"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li> -->
         {% elif 'student_exams' in request.path %}
         <li><a href="../student_dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="active"><a href="../student_exams"><i class="fa fa-clipboard"></i> <span>Examinations</span></a></li>
         <li><a href="../student_progress"><i class="fa fa-bar-chart"></i> <span>Progress</span></a></li>
         <li><a href="../student_profile"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-        <li><a href="../sign_out"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
-        {% elif 'student_exams' in request.path %}
+        <!-- <li><a href="../sign_out"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li> -->
+        {% elif 'student_progress' in request.path %}
         <li><a href="../student_dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li><a href="../student_exams"><i class="fa fa-clipboard"></i> <span>Examinations</span></a></li>
         <li class="active"><a href="../student_progress"><i class="fa fa-bar-chart"></i> <span>Progress</span></a></li>
         <li><a href="../student_profile"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-        <li><a href="../sign_out"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+        <!-- <li><a href="../sign_out"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li> -->
+        {% elif 'student_profile' in request.path %}
+        <li><a href="../student_dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <li><a href="../student_exams"><i class="fa fa-clipboard"></i> <span>Examinations</span></a></li>
+        <li><a href="../student_progress"><i class="fa fa-bar-chart"></i> <span>Progress</span></a></li>
+        <li class="active"><a href="../student_profile"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+        <!-- <li><a href="../sign_out"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li> -->
         {% endif %}
       </ul>
       <!-- /.sidebar-menu -->
@@ -164,7 +170,6 @@ desired effect
 <script src="{% static "dataTables.bootstrap.min.js" %}"></script>
 <script src="{% static "dataTables.responsive.min.js" %}"></script>
 <script src="{% static "responsive.bootstrap.min.js" %}"></script>
-
 
 </body>
 </html>
