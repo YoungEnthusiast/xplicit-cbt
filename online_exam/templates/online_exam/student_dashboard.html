@@ -84,7 +84,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="{% static "image.jpeg" %}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{request.session.first_name}} {{request.session.last_name}}</span>
+              <span class="hidden-xs">{{request.session.first_name}} {{request.session.last_name}} <i class="fa fa-sign-out"></i></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -172,7 +172,7 @@ desired effect
                       <div class="icon">
                         <i class="fa fa-check-square-o"></i>
                       </div>
-                      <a href="../student_exams/" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                      <a href="../student_exams/" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                   <div class="col-lg-4">
@@ -185,7 +185,7 @@ desired effect
                         <div class="icon">
                           <i class="fa fa-bar-chart"></i>
                         </div>
-                        <a href="../student_progress" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="../student_progress" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
                       </div>
                     </div>
                     <div class = "col-lg-4">
@@ -193,12 +193,12 @@ desired effect
                           <div class="inner">
                             <h3>{{no_of_users}}</h3>
 
-                            <p>User Registrations</p>
+                            <p>Registration Profile</p>
                           </div>
                           <div class="icon">
                             <i class="fa fa-users"></i>
                           </div>
-                          <a href="../student_profile" class="small-box-footer">Your info <i class="fa fa-arrow-circle-right"></i></a>
+                          <a href="../student_profile" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                       </div>
             </div>
