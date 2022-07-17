@@ -9,10 +9,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>IIITS| Dashboard</title>
+  <title>Student's Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.css" %}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{% static "bower_components/font-awesome/css/font-awesome.min.css" %}">
   <!-- Ionicons -->
@@ -62,11 +62,11 @@ desired effect
   <header class="main-header">
 
     <!-- logo2 -->
-    <a href="http://www.iiits.ac.in" class="logo2">
+    <a href="https://www.xds.com" class="logo2">
       <!-- mini logo2 for sidebar mini 50x50 pixels -->
 
       <!-- logo2 for regular state and mobile devices -->
-      <span class="logo2-lg"><b><img src="{% static "logo2.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
+      <span class="logo2-lg"><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> <strong class="text-xplicit-orange">Xplicit Digital Solutions</strong> </span>
     </a>
 
      <!-- Header Navbar -->
@@ -77,7 +77,7 @@ desired effect
       </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav bg-primary">
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -147,10 +147,9 @@ desired effect
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Dashboard
-        <small>See your progress and build up your skills</small>
-      </h1>
+      <h4>
+        You're welcome, <strong class="text-xplicit-orange">{{request.session.first_name}}.</strong> Navigate through the portal using the left panel
+      </h4>
       <ol class="breadcrumb">
         <li><a href="active"><i class="fa fa-dashboard"></i> Dashboard</a></li>
       </ol>
@@ -165,7 +164,7 @@ desired effect
         <div class = "container" style="width:100%">
             <div class = "row">
                 <div class="col-lg-4">
-                    <div class="small-box bg-red">
+                    <div class="small-box bg-orange">
                       <div class="inner">
                         <h3>{{number_of_exams}}</h3>
                         <p>Examinations</p>
@@ -177,7 +176,7 @@ desired effect
                     </div>
                   </div>
                   <div class="col-lg-4">
-                      <div class="small-box bg-maroon">
+                      <div class="small-box bg-primary">
                         <div class="inner">
                           <h3>{{pass_percentage}}<sup style="font-size: 20px">%</sup></h3>
 
