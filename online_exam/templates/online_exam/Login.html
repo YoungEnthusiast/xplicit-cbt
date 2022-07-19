@@ -43,7 +43,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Please enter your registered email and password</p>
 
-    <form action="../login/" method="post">
+    <form action=".." method="post">
       {% csrf_token %}
       <div class="form-group has-feedback">
         <input class="form-control" name="email" pattern="[^ @]*@[^ @]*" placeholder="Email" type="email" oninvalid="setCustomValidity('Please enter a valid email')" onchange="try{setCustomValidity('')}catch(e){}" required>

@@ -57,7 +57,7 @@ def faculty_dashboard(request):
             pass_percentage = pass_p*100/count
         return render(request ,'online_exam/faculty_dashboard.html', {"num_of_users":user.objects.count(), "num_of_exams":exam_detail.objects.count(), "num_of_questions":question_bank.objects.count(), "registrations":registrations, "dataArray":dataArray, "pass_percentage":pass_percentage})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 @csrf_exempt
 def faculty_add_course(request):
@@ -78,7 +78,7 @@ def faculty_add_course(request):
         else:
             return render(request,'online_exam/faculty_add_course.html')
     else:
-        return redirect("../login")
+        return redirect("..")
 
 @csrf_exempt
 def faculty_add_exam(request):
@@ -109,7 +109,7 @@ def faculty_add_exam(request):
             print("else entered")
             return render(request ,'online_exam/faculty_add_exam.html', {"courses":course.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_add_topic(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -128,7 +128,7 @@ def faculty_add_topic(request):
         else:
             return render(request ,'online_exam/faculty_add_topic.html')
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_add_subtopic(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -148,7 +148,7 @@ def faculty_add_subtopic(request):
         else:
             return render(request ,'online_exam/faculty_add_subtopic.html', {"topics":topic.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 def faculty_add_question(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
         """print(request.POST.get("question", False))
@@ -213,7 +213,7 @@ def faculty_add_question(request):
         else:
             return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.all(), "exams": exam_detail.objects.all(), "topics": topic.objects.all(), "subtopics": subtopic.objects.all(), "levels": level.objects.all(), "question_type":question_type.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 @csrf_exempt
 def faculty_modify_course(request):
@@ -239,7 +239,7 @@ def faculty_modify_course(request):
         else:
             return render(request ,'online_exam/faculty_modify_course.html', {"courses":course.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 @csrf_exempt
 def faculty_modify_exam(request):
@@ -276,7 +276,7 @@ def faculty_modify_exam(request):
             print("else entered")
             return render(request ,'online_exam/faculty_modify_exam.html', {"exams":exam_detail.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 def faculty_modify_topic(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
         if(request.POST.get('id', False) != False and request.POST.get('topic_name', False) != False and request.POST.get('status', False) != False and request.POST.get('description', False) != False):
@@ -299,7 +299,7 @@ def faculty_modify_topic(request):
         else:
             return render(request ,'online_exam/faculty_modify_topic.html', {"topics":topic.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_modify_subtopic(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -324,7 +324,7 @@ def faculty_modify_subtopic(request):
         else:
             return render(request ,'online_exam/faculty_modify_subtopic.html', {"subtopics":subtopic.objects.all(),"topics":topic.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_modify_question(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -416,7 +416,7 @@ def faculty_modify_question(request):
             Final["questions"] = V
         return render(request ,'online_exam/faculty_modify_question.html', Final)
     else:
-        return redirect("../login")
+        return redirect("..")
 
 @csrf_exempt
 def faculty_update_course(request):
@@ -427,7 +427,7 @@ def faculty_update_course(request):
             data = course.objects.get(pk = int(request.POST['id']))
             return render(request ,'online_exam/faculty_update_course.html', {"data": data})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 @csrf_exempt
 def faculty_update_exam(request):
@@ -440,14 +440,14 @@ def faculty_update_exam(request):
         return render(request ,'online_exam/faculty_update_exam.html', {"result": result, "courses": course.objects.all(), "start_date":start_date, "end_date":end_date, "start_time":start_time, "end_time":end_time})
         #print("id---------------------------------------------------------", int(request.POST['id']))
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_update_topic(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
         result = topic.objects.get(pk = int(request.POST['id']))
         return render(request ,'online_exam/faculty_update_topic.html', {"result": result})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_update_subtopic(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -455,7 +455,7 @@ def faculty_update_subtopic(request):
         print(result.topic_id.topic_name)
         return render(request ,'online_exam/faculty_update_subtopic.html', {"result":result, "topics":topic.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_update_question(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -502,13 +502,13 @@ def faculty_update_question(request):
             ques['levels'] = level.objects.all()
         return render(request ,'online_exam/faculty_update_question.html', ques)
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_view_courses(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
         return render(request ,'online_exam/faculty_view_courses.html', {"courses":course.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 @csrf_exempt
 def faculty_view_exams(request):
@@ -517,13 +517,13 @@ def faculty_view_exams(request):
         #print(data)
         return render(request ,'online_exam/faculty_view_exams.html', {"exams":exam_detail.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_view_topics(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
         return render(request ,'online_exam/faculty_view_topics.html', {"topics":topic.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_view_subtopics(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -539,7 +539,7 @@ def faculty_view_subtopics(request):
             L.append(K)
         return render(request ,'online_exam/faculty_view_subtopics.html', {"subtopics":L})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_view_questions(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -577,7 +577,7 @@ def faculty_view_questions(request):
             V.append(A)
         return render(request ,'online_exam/faculty_view_questions.html',{"questions":V})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_evaluate(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -596,7 +596,7 @@ def faculty_evaluate(request):
             data.append(data1)
         return render(request ,'online_exam/faculty_evaluate.html', {"data":data})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_exam_registrations(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -621,7 +621,7 @@ def faculty_exam_registrations(request):
             data.append(data1)
         return render(request ,'online_exam/faculty_exam_registrations.html',{"data":data})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 
 @csrf_exempt
@@ -656,7 +656,7 @@ def modify_user(request):
         else:
             return redirect("../faculty_user_registrations")
     else:
-        return redirect("../login")
+        return redirect("..")
 
 @csrf_exempt
 def faculty_user_registrations(request):
@@ -680,7 +680,7 @@ def faculty_user_registrations(request):
         else:
             return render(request,'online_exam/faculty_user_registrations.html', {"data":user.objects.all()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_register_evaluate(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -712,7 +712,7 @@ def faculty_register_evaluate(request):
             query.append(subquery)
         return render(request ,'online_exam/faculty_register_evaluate.html', {"registrations": query})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def faculty_manual_evaluate(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
@@ -793,7 +793,7 @@ def faculty_manual_evaluate(request):
             data = json.dumps(data)
             return render(request ,'online_exam/faculty_manual_evaluate.html', {"data":data, "exam_id":1, "registration_id":1})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 @csrf_exempt
 def faculty_profile(request):
@@ -824,7 +824,7 @@ def faculty_profile(request):
         currentUser.id = temp.id
         return render(request, "online_exam/faculty_profile.html", {"currentUser" : currentUser})
     else:
-        return redirect("../login")
+        return redirect("..")
 # Create your views here.
 def student_dashboard(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1):
@@ -882,7 +882,7 @@ def student_dashboard(request):
             pass_percentage = pass_p*100/count
         return render(request, 'online_exam/student_dashboard.html', {"number_of_exams":exam_detail.objects.count(), "no_of_users":user.objects.count(), "pass_percentage":pass_percentage, "dataArray":dataArray, "performance":perform})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def student_exams(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1):
@@ -909,7 +909,7 @@ def student_exams(request):
         Final["exams"] = exams
         return render(request, 'online_exam/student_exams.html', Final)
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def student_attempt_exam(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1 and request.POST.get('registration_id', False) != False and request.POST.get('exam_id', False) != False):
@@ -957,7 +957,7 @@ def student_attempt_exam(request):
         seconds = math.floor((b-a).total_seconds())
         return render(request, 'online_exam/student_attempt_exam.html', {"myArray":final, "sizeMyArray":j, "exam_id":exam_id, "registration_id":registration_id, "seconds": seconds})
     else:
-        return redirect("../login")
+        return redirect("..")
 def student_approved_exams(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1):
         Final = []
@@ -982,7 +982,7 @@ def student_approved_exams(request):
             Final.append(exams)
         return render(request, 'online_exam/student_approved_exams.html', {"exams":Final, "current_time":datetime.datetime.now()})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def student_verify(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1):
@@ -1042,7 +1042,7 @@ def student_verify(request):
         #return HttpResponse(marks)
 
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def student_progress(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1):
@@ -1067,7 +1067,7 @@ def student_progress(request):
             query.append(subquery)
         return render(request, 'online_exam/student_progress.html', {"registrations":query})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def student_answer_key(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1):
@@ -1104,7 +1104,7 @@ def student_answer_key(request):
             data.append(subdata)
         return render(request, 'online_exam/student_answer_key.html', {"data":data})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def student_profile(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1):
@@ -1134,7 +1134,7 @@ def student_profile(request):
         currentUser.id = temp.id
         return render(request, 'online_exam/student_profile.html', {"currentUser" : user.objects.get(pk=request.session['id'])})
     else:
-        return redirect("../login")
+        return redirect("..")
 
 def login(request):
     if(request.session.get('id', False) == False):
@@ -1148,7 +1148,7 @@ def login(request):
                     request.session['email'] = login_user.email
                     request.session['phone'] = login_user.phone
                     request.session['account_type'] = login_user.account_type
-                    return redirect('../login')
+                    return redirect('..')
                 else:
                     return render(request, 'online_exam/Login.html', {"message":"Invalid Credentials!!"})
             else:
@@ -1174,7 +1174,7 @@ def signup(request):
 
 def sign_out(request):
     request.session.flush()
-    return redirect('../login')
+    return redirect('..')
 
 def authenticate(request, token=None):
     clientSecret = "1c616e2f378f9aa90c936b1560e6d0c372fa5e5a54457356f39573955e7e64b445d2f03673a8905088b43c114465020825f48b79e8ce85b0e20e6ad8b736e860"
@@ -1199,7 +1199,7 @@ def authenticate(request, token=None):
     request.session['phone'] = login_user.phone
     request.session['account_type'] = login_user.account_type
     print(data)
-    return redirect('login')
+    return redirect('')
 
 def get_exams_by_course(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0 and request.POST.get('course_id', False) != False):
