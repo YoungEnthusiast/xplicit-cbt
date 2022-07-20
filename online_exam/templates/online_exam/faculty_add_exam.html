@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>IIITS| Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.css" %}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{% static "bower_components/font-awesome/css/font-awesome.min.css" %}">
   <!-- Ionicons -->
@@ -69,15 +69,15 @@ desired effect
   <header class="main-header">
 
     <!-- logo2 -->
-    <a href="http://www.iiits.ac.in" class="logo2">
+    <a href="https://www.xplicitsolutions.com.ng" class="logo2">
       <!-- mini logo2 for sidebar mini 50x50 pixels -->
 
       <!-- logo2 for regular state and mobile devices -->
-      <span class="logo2-lg"><b><img src="{% static "logo2.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
+      <span class="logo2-lg"><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> <strong class="text-xplicit-orange">Xplicit Solutions</strong> </span>
     </a>
 
-    <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
+     <!-- Header Navbar -->
+     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
@@ -87,11 +87,11 @@ desired effect
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle bg-primary" data-toggle="dropdown">
               <!-- The user image in the navbar-->
               <img src="{% static "image.jpeg" %}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Subhadeep Dash</span>
+              <span class="hidden-xs">{{request.session.first_name}} {{request.session.last_name}} <i class="fa fa-sign-out"></i></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -99,7 +99,7 @@ desired effect
                 <img src="{% static "image.jpeg" %}" class="img-circle" alt="User Image">
 
                 <p>
-                  Subhadeep Dash
+                  {{request.session.first_name}} {{request.session.last_name}}
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -108,7 +108,7 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">-->
-                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    <a href="../sign_out" class="btn btn-default btn-flat">Sign out</a>
 				        <!--<div>-->
                 <!--</div>-->
               </li>
@@ -130,7 +130,7 @@ desired effect
           <img src="{% static "teacher-icon.png" %}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Faculty Portal</p>
+          <p>Tutor's Portal</p>
         </div>
       </div>
 
@@ -163,30 +163,7 @@ desired effect
             <li><a href="../faculty_modify_exam"><i class="fa fa-pencil"></i>Modify Examination</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-list"></i> <span>Topics</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../faculty_view_topics"><i class="fa fa-eye"></i>View Topics</a></li>
-            <li><a href="../faculty_add_topic"><i class="fa fa-plus"></i>Add Topic</a></li>
-            <li><a href="../faculty_modify_topic"><i class="fa fa-pencil"></i>Modify Topic</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-outdent"></i> <span>Subtopics</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../faculty_view_subtopics"><i class="fa fa-eye"></i>View Subtopics</a></li>
-            <li><a href="../faculty_add_subtopic"><i class="fa fa-plus"></i>Add Subtopic</a></li>
-            <li><a href="../faculty_modify_subtopic"><i class="fa fa-pencil"></i>Modify Subtopic</a></li>
-          </ul>
-        </li>
+
         <li class="treeview">
           <a href="#"><i class="fa fa-question-circle"></i> <span>Questions</span>
             <span class="pull-right-container">
@@ -228,7 +205,7 @@ desired effect
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-clipboard"></i>Examinations</a></li>
-        <li class="active"><i class="fa fa-plus"></i>Add Examinations</li>
+        <li class="active"><i class="fa fa-plus"></i> Add Examinations</li>
       </ol>
     </section>
 
@@ -273,7 +250,7 @@ desired effect
                   <label for="inputDescription" class="col-sm-2 control-label">Description</label>
 
                   <div class="col-sm-10">
-                    <input class="form-control" id="inputDescription" placeholder="Description" type="text" name="description" required>
+                    <input class="form-control" id="inputDescription" placeholder="Description (You may leave blank)" type="text" name="description" >
                   </div>
                 </div>
                 <div class="form-group">
@@ -340,7 +317,7 @@ desired effect
                   </div>
                   <label for="inputAttemptsAllowed" class="col-sm-2 control-label">Attempts Allowed</label>
                   <div class="col-sm-2">
-                    <input class="form-control" id="AttemptsAllowed" placeholder="Attemps" type="text" name="attempts_allowed" required>
+                    <input class="form-control" id="AttemptsAllowed" placeholder="numbers" type="text" name="attempts_allowed" required>
                   </div>
                 </div>
 
@@ -358,11 +335,10 @@ desired effect
     </div>
     </section>
   </div>
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-     Indian Institute of Information Technology, Sri City
-    </div>
-    <strong>Copyright &copy; 2018 <a href="http://www.iiits.ac.in">Indian Institute of Information Technology</a>.</strong> All rights reserved.
+  <footer class="main-footer text-center">
+    <!-- Copyright &copy; <strong class="text-xplicit-orange">Xplicit Solutions</strong> <span class="year"></span> -->
+
+    Copyright &copy; <strong><a class="text-xplicit-orange" href="https://www.xplicitsolutions.com.ng">Xplicit Solutions</a>. </strong><span class="year"></span>
   </footer>
 </div>
 <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>

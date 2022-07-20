@@ -9,10 +9,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>IIITS| Modify_Course</title>
+  <title>Modify Course</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.css" %}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{% static "bower_components/font-awesome/css/font-awesome.min.css" %}">
   <!-- Ionicons -->
@@ -65,11 +65,11 @@ desired effect
   <header class="main-header">
 
     <!-- logo2 -->
-    <a href="http://www.iiits.ac.in" class="logo2">
+    <a href="https://www.xplicitsolutions.com.ng" class="logo2">
       <!-- mini logo2 for sidebar mini 50x50 pixels -->
 
       <!-- logo2 for regular state and mobile devices -->
-      <span class="logo2-lg"><b><img src="{% static "logo2.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
+      <span class="logo2-lg"><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> <strong class="text-xplicit-orange">Xplicit Solutions</strong> </span>
     </a>
 
      <!-- Header Navbar -->
@@ -83,11 +83,11 @@ desired effect
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle bg-primary" data-toggle="dropdown">
               <!-- The user image in the navbar-->
               <img src="{% static "image.jpeg" %}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{request.session.first_name}} {{request.session.last_name}}</span>
+              <span class="hidden-xs">{{request.session.first_name}} {{request.session.last_name}} <i class="fa fa-sign-out"></i></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -126,7 +126,7 @@ desired effect
           <img src="{% static "teacher-icon.png" %}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Faculty Portal</p>
+          <p>Tutor's Portal</p>
         </div>
       </div>
 
@@ -159,30 +159,7 @@ desired effect
             <li><a href="../faculty_modify_exam"><i class="fa fa-pencil"></i>Modify Examination</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-list"></i> <span>Topics</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../faculty_view_topics"><i class="fa fa-eye"></i>View Topics</a></li>
-            <li><a href="../faculty_add_topic"><i class="fa fa-plus"></i>Add Topic</a></li>
-            <li><a href="../faculty_modify_topic"><i class="fa fa-pencil"></i>Modify Topic</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-outdent"></i> <span>Subtopics</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../faculty_view_subtopics"><i class="fa fa-eye"></i>View Subtopics</a></li>
-            <li><a href="../faculty_add_subtopic"><i class="fa fa-plus"></i>Add Subtopic</a></li>
-            <li><a href="../faculty_modify_subtopic"><i class="fa fa-pencil"></i>Modify Subtopic</a></li>
-          </ul>
-        </li>
+        
         <li class="treeview">
           <a href="#"><i class="fa fa-question-circle"></i> <span>Questions</span>
             <span class="pull-right-container">
@@ -224,14 +201,14 @@ desired effect
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-book"></i>Courses</a></li>
-        <li class="active"><i class="fa fa-pencil"></i>Modify Courses</li>
+        <li class="active"><i class="fa fa-pencil"></i> Modify Courses</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!--------------------------
+      <!-- ------------------------
         | Your Page Content Here |
         -------------------------->
 
@@ -246,14 +223,14 @@ desired effect
               <td>Information Technology Systems</td>
               <td>Dr. Uma Garimella</td>
               <td>2018</td>
-              <td><form action="{% url 'faculty_update_course' %}" method="post"><input name="course_name" value="IT Systems" type="hidden"><input name="course_description" value="Information Technology Systems" type="hidden"><input name="Faculty" value="Dr. Uma Garimella" type="hidden"><input name="year" value="2018" type="hidden"><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-edit"></i>Modify</button></form></td>
+              <td><form action="{% url 'faculty_update_course' %}" method="post"><input name="course_name" value="IT Systems" type="hidden"><input name="course_description" value="Information Technology Systems" type="hidden"><input name="Faculty" value="Dr. Uma Garimella" type="hidden"><input name="year" value="2018" type="hidden"><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Modify</button></form></td>
             </tr><tr role="row" class="even">
               <td>2</td>
               <td>Digital Image Processing</td>
               <td>An elective in Image Processing</td>
               <td>Dr. Snehasis Mukherjee</td>
               <td>2018</td>
-              <td><form action="{% url 'faculty_update_course' %}" method="post"><input name="course_name" value="Digital Image Processing" type="hidden"><input name="course_description" value="An elective in Image Processing" type="hidden"><input name="Faculty" value="Dr. Snehasis Mukherjee" type="hidden"><input name="year" value="2018" type="hidden"><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-edit"></i>Modify</button></form></td>
+              <td><form action="{% url 'faculty_update_course' %}" method="post"><input name="course_name" value="Digital Image Processing" type="hidden"><input name="course_description" value="An elective in Image Processing" type="hidden"><input name="Faculty" value="Dr. Snehasis Mukherjee" type="hidden"><input name="year" value="2018" type="hidden"><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Modify</button></form></td>
             </tr><tr role="row" class="odd">
               <td>3</td>
               <td>Thoery of Computation</td>
@@ -267,21 +244,21 @@ desired effect
               <td>An IT elective for Computer Science</td>
               <td>Dr. P. Viswanath</td>
               <td>2018</td>
-              <td><form action="{% url 'faculty_update_course' %}" method="post"><input name="course_name" value="Data Mining" type="hidden"><input name="course_description" value="An IT elective for Computer Science" type="hidden"><input name="Faculty" value="Dr. P. Viswanath" type="hidden"><input name="year" value="2018" type="hidden"><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-edit"></i>Modify</button></form></td>
+              <td><form action="{% url 'faculty_update_course' %}" method="post"><input name="course_name" value="Data Mining" type="hidden"><input name="course_description" value="An IT elective for Computer Science" type="hidden"><input name="Faculty" value="Dr. P. Viswanath" type="hidden"><input name="year" value="2018" type="hidden"><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Modify</button></form></td>
             </tr><tr role="row" class="odd">
               <td>5</td>
               <td>Compiler Design</td>
               <td>A core course for B.Tech students</td>
               <td>Dr. P. Vihwanath</td>
               <td>2017</td>
-              <td><form action="{% url 'faculty_update_course' %}" method="post"><input name="course_name" value="Compiler Design" type="hidden"><input name="course_description" value="A core course for B. Tech students" type="hidden"><input name="Faculty" value="Dr. P. Viswanath" type="hidden"><input name="year" value="2017" type="hidden"><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-edit"></i>Modify</button></form></td>
+              <td><form action="{% url 'faculty_update_course' %}" method="post"><input name="course_name" value="Compiler Design" type="hidden"><input name="course_description" value="A core course for B. Tech students" type="hidden"><input name="Faculty" value="Dr. P. Viswanath" type="hidden"><input name="year" value="2017" type="hidden"><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Modify</button></form></td>
             </tr><tr role="row" class="even">
               <td>6</td>
               <td>Computer Vision</td>
               <td>A core course</td>
               <td>Dr. Shiv Ram Dubey</td>
               <td>2017</td>
-              <td><form action="{% url 'faculty_update_course' %}" method="post"><input name="course_name" value="Computer Vision" type="hidden"><input name="course_description" value="A core course" type="hidden"><input name="Faculty" value="Dr. Shiv Ram Dubey" type="hidden"><input name="year" value="2017" type="hidden"><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-edit"></i>Modify</button></form></td>
+              <td><form action="{% url 'faculty_update_course' %}" method="post"><input name="course_name" value="Computer Vision" type="hidden"><input name="course_description" value="A core course" type="hidden"><input name="Faculty" value="Dr. Shiv Ram Dubey" type="hidden"><input name="year" value="2017" type="hidden"><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Modify</button></form></td>
             </tbody>
         </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example_previous"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example_next"><a href="#" aria-controls="example" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>-->
         {% if message %}
@@ -315,17 +292,16 @@ desired effect
           {% elif i.status == 0 %}
           Inactive
           {% endif %}
-        </td><td>{{i.created}}</td><td>{{i.modified}}</td><td><form action = "../faculty_update_course/" method = "POST"><input type = "hidden" name = "id" value = "{{i.id}}">{% csrf_token %}<button class="btn btn-xs btn-primary" type="submit"><i class="fa fa-edit"></i>Modify</button></td></form></tr>
+        </td><td>{{i.created}}</td><td>{{i.modified}}</td><td><form action = "../faculty_update_course/" method = "POST"><input type = "hidden" name = "id" value = "{{i.id}}">{% csrf_token %}<button class="btn btn-xs btn-primary" type="submit"><i class="fa fa-edit"></i> Modify</button></td></form></tr>
       {% endfor %}
     </tbody>
   </table>
     </section>
   </div>
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-     Indian Institute of Information Technology, Sri City
-    </div>
-    <strong>Copyright &copy; 2018 <a href="http://www.iiits.ac.in">Indian Institute of Information Technology</a>.</strong> All rights reserved.
+  <footer class="main-footer text-center">
+    <!-- Copyright &copy; <strong class="text-xplicit-orange">Xplicit Solutions</strong> <span class="year"></span> -->
+
+    Copyright &copy; <strong><a class="text-xplicit-orange" href="https://www.xplicitsolutions.com.ng">Xplicit Solutions</a>. </strong><span class="year"></span>
   </footer>
 </div>
 <script src="{% static "jquery.min.js" %}"></script>

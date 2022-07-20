@@ -247,9 +247,32 @@ desired effect
                     </select>
                   </div>
                 </div>
-                
+                <div class="form-group">
+                  <div class="col-sm-6">
+                    <select class="form-control" name="topic" id = "topic" required>
+                    <option disabled selected value>Topic</option>
+                      {% for i in topics %}
+                        <option value = "{{i.id}}">{{i.topic_name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-sm-6">
+                    <select class="form-control" name="subtopic" id = "subtopic" required>
+                    <option disabled selected value>Subtopic</option>
+                      {% for i in subtopics %}
+                        <option value = "{{i.id}}">{{i.subtopic_name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
                 </div><div class="form-group">
-
+                  <div class="col-sm-6">
+                    <select class="form-control" name="level" required>
+                    <option disabled selected value>Level</option>
+                    {% for i in levels %}
+                      <option value = "{{i.id}}">{{i.level_name}}</option>
+                    {% endfor %}
+                    </select>
+                  </div>
                   <div class="col-sm-6">
                     <select class="form-control" name="status" required>
                     <option disabled selected value>Status</option>

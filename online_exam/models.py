@@ -29,13 +29,13 @@ class user(models.Model):
         #return str(self.id) + "; " + str(self.first_name) + "; " + str(self.last_name) + "; " + str(self.phone) + "; " + str(self.email) + "; " + str(self.password) + "; " + str(self.account_type) + "; " + str(self.status) + "; " + str(self.created) + "; " + str(self.modified)
 
 class level(models.Model):
-    level_name = models.CharField(default = "", max_length = 100)
+    level_name = models.CharField(default = "", null=True, blank=True, max_length = 100)
     def __str__(self):
         return str(self.id) + "; " + str(self.level_name)
 # Create your models here.
 
 class topic(models.Model):
-    topic_name = models.CharField(default = "", max_length = 100)
+    topic_name = models.CharField(default = "", blank=True, null=True, max_length = 100)
     description = models.TextField(null="True", blank=True)
     status = models.IntegerField(default = 1)
     created = models.DateTimeField(default = timezone.now)
@@ -44,7 +44,7 @@ class topic(models.Model):
         return str(self.id) + "; " + str(self.topic_name) + "; " + str(self.description) + "; " + str(self.status) + "; " + str(self.created) + "; " + str(self.modified)
 
 class subtopic(models.Model):
-    subtopic_name = models.CharField(default = "", max_length = 100)
+    subtopic_name = models.CharField(default = "", blank=True, null=True, max_length = 100)
     description = models.TextField(null="True", blank=True)
     topic_id = models.ForeignKey(topic, on_delete = models.CASCADE)
     status = models.IntegerField(default = 1)
@@ -78,8 +78,8 @@ class question_bank(models.Model):
     question = models.TextField(null="True", blank=True)
     description = models.TextField(null="True", blank=True)
     question_type = models.ForeignKey(question_type, on_delete = models.CASCADE)
-    subtopic_id = models.ForeignKey(subtopic, on_delete = models.CASCADE)
-    level_id = models.ForeignKey(level, on_delete = models.CASCADE)
+    # subtopic_id = models.ForeignKey(subtopic, on_delete = models.CASCADE)
+    # level_id = models.ForeignKey(level, on_delete = models.CASCADE)
     exam_id = models.ForeignKey(exam_detail, on_delete =models.CASCADE)
     score = models.FloatField()
     status = models.IntegerField(default = 1)

@@ -1,0 +1,176 @@
+{% extends 'online_exam/base_faculty.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Tutor's Dashboard</title>
+
+{% endblock title %}
+
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h4>
+        You're welcome, <strong class="text-xplicit-orange">{{request.session.first_name}}.</strong> Navigate through the portal using the left panel
+      </h4>
+      <ol class="breadcrumb">
+        <li class="active"><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+
+      <!--------------------------
+        | Your Page Content Here |
+        -------------------------->
+
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-orange">
+            <div class="inner">
+              <h3>{{num_of_exams}}</h3>
+
+              <p>Examinations</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-check-square-o"></i>
+            </div>
+            <a href="../faculty_view_exams" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-primary">
+            <div class="inner">
+              <h3>{{num_of_questions}}<!--sup style="font-size: 20px">%</sup--></h3>
+
+              <p>Questions</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-question-circle"></i>
+            </div>
+            <a href="../faculty_view_questions" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{pass_percentage}}<sup style="font-size: 20px">%</sup></h3>
+
+              <p>Pass Percentage</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-line-chart"></i>
+            </div>
+            <a href="../faculty_evaluate" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{{num_of_users}}</h3>
+
+              <p>User Registrations</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="../faculty_user_registrations" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+
+
+        <div class = "row">
+          <div class="col-lg-5">
+              <div class="box box-info">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Users Registered per Exam</h3>
+                  </div>
+                  <div class="box-body">
+                  <div id="piechart" style="width: 100%; height: 300px;"></div>
+                </div>
+              </div>
+          </div>
+          <div class="col-lg-7">
+              <div class="box box-info">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Users Registered per Month</h3>
+                  </div>
+                  <div class="box-body">
+                      <div id="chart_div" style="width: 100%; height: 300px;"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Examination', 'Users Registered'],
+
+      {% for i in registrations %}
+      ["{{i.exam_name}}", {{i.count}}],
+      {% endfor %}
+
+    ]);
+
+    var options = {
+      //title: 'Users Registered per Exam'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
+  }
+</script>
+<script>
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawMultSeries);
+
+    function drawMultSeries() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('date', 'Month');
+          data.addColumn('number', 'Users Registered');
+
+          data.addRows([
+            {% for i in dataArray %}
+
+              [ new Date("{{i.year}}", "{{i.month}}", 1), {{i.count}}],
+            {% endfor %}
+          ]);
+
+          var options = {
+            title: 'Users Registered per Month',
+            hAxis: {
+              title: 'Months of the Year',
+              format: 'MMMM yyyy',
+            },
+            vAxis: {
+              title: 'Number of users registered'
+            }
+          };
+
+          var chart = new google.visualization.ColumnChart(
+            document.getElementById('chart_div'));
+
+          chart.draw(data, options);
+        }
+</script>
+
+{% endblock content%}

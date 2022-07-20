@@ -271,44 +271,9 @@ desired effect
                     </select>
                   </div>
                 </div>
-                <div class="form-group">
-                  <div class="col-sm-6">
-                    <select class="form-control" name="topic" id = "topic" required>
-                    <option disabled value>Topic</option>
-                      {% for i in topics %}
-                      {% if i.id == topic %}
-                      <option value = "{{i.id}}" selected="selected">{{i.topic_name}}</option>
-                      {% else %}
-                      <option value = "{{i.id}}">{{i.topic_name}}</option>
-                      {% endif %}
-                      {% endfor %}
-                    </select>
-                  </div>
-                  <div class="col-sm-6">
-                    <select class="form-control" name="subtopic" id = "subtopic" required>
-                    <option disabled value>Subtopic</option>
-                    {% for i in subtopics %}
-                      {% if i.id == subtopic %}
-                      <option value = "{{i.id}}" selected="selected">{{i.subtopic_name}}</option>
-                      {% else %}
-                      <option value = "{{i.id}}">{{i.subtopic_name}}</option>
-                      {% endif %}
-                      {% endfor %}
-                    </select>
-                  </div>
+              
                 </div><div class="form-group">
-                  <div class="col-sm-6">
-                    <select class="form-control" name="level" required>
-                    <option disabled value>Level</option>
-                    {% for i in levels %}
-                      {% if i.id == level %}
-                      <option value = "{{i.id}}" selected="selected">{{i.level_name}}</option>
-                      {% else %}
-                      <option value = "{{i.id}}">{{i.level_name}}</option>
-                      {% endif %}
-                    {% endfor %}
-                    </select>
-                  </div>
+
                   <div class="col-sm-6">
                     <select class="form-control" name="status" required>
                     {% if status == 1 %}

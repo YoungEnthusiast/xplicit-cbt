@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="{% static "dist/css/skins/skin-purple.min.css" %}">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <link rel="stylesheet" href="{% static "font-awesome.css" %}">
+  <link rel="stylesheet" href="{% static "dataTables.bootstrap.min.css" %}">
+  <link rel="stylesheet" href="{% static "buttons.dataTables.min.css" %}">
+  <link rel="stylesheet" href="{% static "responsive.bootstrap.min.css" %}">
 
   {% block title %}
   {% endblock title %}
@@ -97,6 +100,13 @@ desired effect
       </div>
     </nav>
   </header>
+
+
+
+
+
+
+
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
 
@@ -117,7 +127,7 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <!--<li class="header">Your details</li>-->
         <!-- Optionally, you can add icons to the links -->
-        {% if 'faculty_dashboard' in request.path %}
+
         <li class="active"><a href="../faculty_dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-book"></i> <span>Courses</span>
@@ -193,7 +203,6 @@ desired effect
         </li>
         <li><a href="../faculty_profile"><i class="fa fa-user"></i> <span>Profile</span></a></li>
         <!--<li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>-->
-        {% endif %}
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -207,7 +216,7 @@ desired effect
   <footer class="main-footer text-center">
     <!-- Copyright &copy; <strong class="text-xplicit-orange">Xplicit Solutions</strong> <span class="year"></span> -->
 
-    Copyright &copy; <strong><a class="text-xplicit-orange" href="http://www.xplicitsolutions.com.ng">Xplicit Solutions</a> </strong><span class="year"></span>.
+    Copyright &copy; <strong><a class="text-xplicit-orange" href="https://www.xplicitsolutions.com.ng">Xplicit Solutions</a> </strong><span class="year"></span>.
   </footer>
 </div>
 <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
@@ -215,6 +224,18 @@ desired effect
 <script src="{% static "bower_components/bootstrap/dist/js/mine.js" %}"></script>
 <script src="{% static "dist/js/adminlte.min.js" %}"></script>
 <script src="{% static "charts/loader.js" %}"></script>
+<script src="{% static "jquery.min.js" %}"></script>
+<script src="{% static "jquery.dataTables.min.js" %}"></script>
+<script src="{% static "dataTables.bootstrap.min.js" %}"></script>
+<script src="{% static "dataTables.responsive.min.js" %}"></script>
+<script src="{% static "responsive.bootstrap.min.js" %}"></script>
+<script src="{% static "dataTables.buttons.min.js" %}"></script>
+<script src="{% static "buttons.flash.min.js" %}"></script>
+<script src="{% static "jszip.min.js" %}"></script>
+<script src="{% static "pdfmake.min.js" %}"></script>
+<script src="{% static "vfs_fonts.js" %}"></script>
+<script src="{% static "buttons.html5.min.js" %}"></script>
+<script src="{% static "buttons.print.min.js" %}"></script>
 
 </body>
 </html>
