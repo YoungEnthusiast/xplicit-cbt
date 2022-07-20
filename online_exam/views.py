@@ -226,10 +226,9 @@ def faculty_add_question(request):
         print(request.POST.get("exam", False))
         print(request.POST.get("score", False))
         print(request.POST.get("status", False))"""
-        if(request.method == "POST" and request.POST.get("question", False) != False and request.POST.get("description", False) != False and request.POST.get("question_type", False) != False and request.POST.get("exam", False) != False and request.POST.get("score", False) != False and request.POST.get("status", False) != False):
+        if(request.method == "POST" and request.POST.get("question", False) != False and request.POST.get("question_type", False) != False and request.POST.get("exam", False) != False and request.POST.get("score", False) != False and request.POST.get("status", False) != False):
             temp = question_bank()
             temp.question =request.POST["question"]
-            temp.description = request.POST["description"]
             temp.question_type = question_type.objects.get(pk=request.POST["question_type"])
             temp.exam_id = exam_detail.objects.get(pk =request.POST["exam"])
             temp.score = request.POST["score"]
@@ -270,10 +269,10 @@ def faculty_add_question(request):
                     temp_answer.question_id = question_id
                     temp_answer.answer = request.POST['answer']
                     temp_answer.save()
-                message = "Question was successfully created!!"
+                message = "The questiion has been created successfully"
                 return render(request ,'online_exam/faculty_add_question.html',  {"courses": course.objects.all(), "exams": exam_detail.objects.all(),  "question_type":question_type.objects.all(), "message":message})
             else:
-                wrong_message = "Sorry, question already exists under the subtopic!!"
+                wrong_message = "Question already exists!"
                 return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.all(), "exams": exam_detail.objects.all(), "question_type":question_type.objects.all(), "wrong_message":wrong_message})
         else:
             return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.all(), "exams": exam_detail.objects.all(), "question_type":question_type.objects.all()})
