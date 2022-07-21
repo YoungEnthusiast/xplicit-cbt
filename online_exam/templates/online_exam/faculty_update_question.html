@@ -61,16 +61,16 @@ desired effect
   <!-- Main Header -->
   <header class="main-header">
 
-    <!-- logo2 -->
-    <a href="http://www.iiits.ac.in" class="logo2">
+    <!-- Logo -->
+    <a href="https://www.xplicitsolutions.com.ng" class="logo2">
       <!-- mini logo2 for sidebar mini 50x50 pixels -->
 
       <!-- logo2 for regular state and mobile devices -->
-      <span class="logo2-lg"><b><img src="{% static "logo2.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> Online</b> Exam</span>
+      <span class="logo2-lg"><img src="{% static "logo.png" %}" alt="My image" style="float:left;width:45px;height:45px;"> <strong class="text-xplicit-orange">Xplicit Solutions</strong> </span>
     </a>
 
-     <!-- Header Navbar -->
-     <nav class="navbar navbar-static-top" role="navigation">
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
@@ -80,11 +80,11 @@ desired effect
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle bg-primary" data-toggle="dropdown">
               <!-- The user image in the navbar-->
               <img src="{% static "image.jpeg" %}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{request.session.first_name}} {{request.session.last_name}}</span>
+              <span class="hidden-xs">{{request.session.first_name}} {{request.session.last_name}} <i class="fa fa-sign-out"></i></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -111,7 +111,7 @@ desired effect
       </div>
     </nav>
   </header>
-  <!-- Left side column. contains the logo2 and sidebar -->
+  <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
@@ -123,7 +123,7 @@ desired effect
           <img src="{% static "teacher-icon.png" %}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Faculty Portal</p>
+          <p>Tutor's Portal</p>
         </div>
       </div>
 
@@ -216,11 +216,9 @@ desired effect
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Update Question
-      </h1>
+      <br>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-question-circle"></i><b> Questions</b></a></li>
+        <li><a href="#"><i class="fa fa-question-circle"></i><b>Questions</b></a></li>
         <li><a href="../faculty_modify_question/"><i class="fa fa-pencil"></i><b>Modify Question</b></a></li>
         <li class="active">Update Question</li>
       </ol>
@@ -237,7 +235,7 @@ desired effect
         <div class="col-lg-10">
         <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Modify question</h3>
+              <h3 class="box-title"><i class="fa fa-edit"></i> Update question</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -271,7 +269,7 @@ desired effect
                     </select>
                   </div>
                 </div>
-              
+
                 </div><div class="form-group">
 
                   <div class="col-sm-6">
@@ -427,7 +425,7 @@ desired effect
 
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-info pull-right"><i class="fa fa-edit">Modify question</i></button>
+                <button type="submit" class="btn btn-info pull-right">OK</button>
               </div>
               <!-- /.box-footer -->
             </form>
@@ -438,11 +436,10 @@ desired effect
     </div>
     </section>
   </div>
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-     Indian Institute of Information Technology, Sri City
-    </div>
-    <strong>Copyright &copy; 2018 <a href="http://www.iiits.ac.in">Indian Institute of Information Technology</a>.</strong> All rights reserved.
+  <footer class="main-footer text-center">
+    <!-- Copyright &copy; <strong class="text-xplicit-orange">Xplicit Solutions</strong> <span class="year"></span> -->
+
+    Copyright &copy; <strong><a class="text-xplicit-orange" href="https://www.xplicitsolutions.com.ng">Xplicit Solutions</a>. </strong><span class="year"></span>
   </footer>
 </div>
 <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>

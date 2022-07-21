@@ -238,13 +238,13 @@ desired effect
         </thead>
         <tbody>
       {% for i in questions %}
-        <tr><td>{{i.question}}</td><td>{{i.description}}</td><td>{{i.question_type}}</td><td>{{i.exam}}</td><td>{{i.score}}</td><td>{{i.options}}</td><td>{{i.answers}}</td><td>
+        <tr><td>{{i.question}}</td><td>{{i.description}}</td><td>{{i.question_type}}</td><td>{{i.exam}}</td><td>{{i.score}}</td>jj<td>{{i.options}}</td><td>{{i.answers}}</td><td>
           {% if i.status == 1 %}
           Active
           {% elif i.status == 0 %}
           Inactive
           {% endif %}
-        </td><td>{{i.created}}</td><td>{{i.modified}}</td><td><form action = "../faculty_update_question/" method = "POST"><input type = "hidden" name = "id" value = "{{i.id}}">{% csrf_token %}<button class="btn btn-xs btn-primary" type="submit"><i class="fa fa-edit"></i>Modify</button></td></form></td></tr>
+        </td><td>{{i.created}}</td><td>{{i.modified}}</td><td><form action = "../faculty_update_question/" method = "POST"><input type = "hidden" name = "id" value = "{{i.id}}">{% csrf_token %}<button class="btn btn-xs btn-primary" type="submit"><i class="fa fa-edit"></i> Modify</button></td></form></td></tr>
       {% endfor %}
     </tbody>
   </table>
