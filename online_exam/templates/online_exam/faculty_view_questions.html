@@ -223,12 +223,10 @@ desired effect
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        View Questions
-      </h1>
+      <br>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-question-circle"></i><b>Questions</b></a></li>
-        <li class="active"><i class="fa fa-eye"></i><b> sView Questions</b></li>
+        <li class="active"><i class="fa fa-eye"></i><b> View Questions</b></li>
       </ol>
     </section>
 
@@ -242,13 +240,9 @@ desired effect
         <thead>
             <tr>
                 <th>Question</th>
-                <th>Description</th>
-		<th>Question Type</th>
-		<th>SubTopic</th>
-		<th>Level</th>
-		<th>Exam</th>
-		<th>Score</th>
-                <th>Topic name</th>
+            		<th>Question Type</th>
+            		<th>Exam</th>
+            		<th>Score</th>
                 <th>Options</th>
                 <th>Answers</th>
                 <th>Status</th>
@@ -258,7 +252,7 @@ desired effect
         </thead>
         <tbody>
       {% for i in questions %}
-        <tr><td>{{i.question}}</td><td>{{i.description}}</td><td>{{i.question_type}}</td><td>{{i.subtopic}}</td><td>{{i.level}}</td><td>{{i.exam}}</td><td>{{i.score}}</td><td>{{i.topic_name}}</td><td>{{i.options}}</td><td>{{i.answers}}</td><td>
+        <tr><td>{{i.question}}</td><td>{{i.question_type}}</td><td>{{i.exam}}</td><td>{{i.score}}</td><td>{{i.options}}</td><td>{{i.answers}}</td><td>
           {% if i.status == 1 %}
           Active
           {% elif i.status == 0 %}
