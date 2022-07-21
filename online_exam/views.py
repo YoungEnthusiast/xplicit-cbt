@@ -113,7 +113,7 @@ def faculty_add_exam(request):
                 return render(request ,'online_exam/faculty_add_exam.html', {"wrong_message":wrong_message})
         else:
             print("else entered")
-            return render(request ,'online_exam/faculty_add_exam.html', {"courses":course.objects.all()})
+            return render(request ,'online_exam/faculty_add_exam.html', {"courses":course.objects.filter(faculty=request.session.get('email'))})
     else:
         return redirect("..")
 
@@ -210,12 +210,12 @@ def faculty_add_question(request):
                     temp_answer.answer = request.POST['answer']
                     temp_answer.save()
                 message = "The questiion has been created successfully"
-                return render(request ,'online_exam/faculty_add_question.html',  {"courses": course.objects.all(), "exams": exam_detail.objects.all(),  "question_type":question_type.objects.all(), "message":message})
+                return render(request ,'online_exam/faculty_add_question.html',  {"courses": course.objects.filter(faculty=request.session.get('email')), "exams": exam_detail.objects.filter(course_id__faculty=request.session.get('email')),  "question_type":question_type.objects.all(), "message":message})
             else:
                 wrong_message = "Question already exists!"
-                return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.all(), "exams": exam_detail.objects.all(), "question_type":question_type.objects.all(), "wrong_message":wrong_message})
+                return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.filter(faculty=request.session.get('email')), "exams": exam_detail.objects.filter(course_id__faculty=request.session.get('email')), "question_type":question_type.objects.all(), "wrong_message":wrong_message})
         else:
-            return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.all(), "exams": exam_detail.objects.all(), "question_type":question_type.objects.all()})
+            return render(request ,'online_exam/faculty_add_question.html', {"courses": course.objects.filter(faculty=request.session.get('email')), "exams": exam_detail.objects.filter(course_id__faculty=request.session.get('email')), "question_type":question_type.objects.all()})
     else:
         return redirect("..")
 
@@ -232,16 +232,16 @@ def faculty_modify_course(request):
             if(course.objects.filter(course_name=temp.course_name).count() == 0 ):
                 course.objects.filter(id=temp.course_id).update(course_name=temp.course_name, description = temp.description, status = temp.status, modified = datetime.datetime.now())
                 message = "Course was updated successfully!!"
-                return render(request ,'online_exam/faculty_modify_course.html', {"courses":course.objects.all(),"message":message})
+                return render(request ,'online_exam/faculty_modify_course.html', {"courses":course.objects.filter(faculty=request.session.get('email')),"message":message})
             elif(course.objects.filter(course_name = temp.course_name).count() == 1 and list(course.objects.filter(course_name=temp.course_name).values("id"))[0]['id'] == int(request.POST['id'])):
                 course.objects.filter(id=temp.course_id).update(course_name=temp.course_name, description = temp.description, faculty=temp.faculty, status = temp.status, modified = datetime.datetime.now())
                 message = "Course was updated successfully!!"
-                return render(request ,'online_exam/faculty_modify_course.html', {"courses":course.objects.all(),"message":message})
+                return render(request ,'online_exam/faculty_modify_course.html', {"courses":course.objects.filter(faculty=request.session.get('email')),"message":message})
             else:
                 wrong_message = "Sorry, the course already exists!!"
-                return render(request ,'online_exam/faculty_modify_course.html', {"courses":course.objects.all(),"wrong_message":wrong_message})
+                return render(request ,'online_exam/faculty_modify_course.html', {"courses":course.objects.filter(faculty=request.session.get('email')),"wrong_message":wrong_message})
         else:
-            return render(request ,'online_exam/faculty_modify_course.html', {"courses":course.objects.all()})
+            return render(request ,'online_exam/faculty_modify_course.html', {"courses":course.objects.filter(faculty=request.session.get('email'))})
     else:
         return redirect("..")
 
@@ -268,17 +268,17 @@ def faculty_modify_exam(request):
             if(exam_detail.objects.filter(exam_name=temp.exam_name, course_id = temp.course_id, year = temp.year).count() == 0):
                 exam_detail.objects.filter(id=temp.id).update(exam_name=temp.exam_name, description=temp.description, course_id=temp.course_id, year=temp.year, status=temp.status, start_time=temp.start_time, end_time=temp.end_time, pass_percentage=temp.pass_percentage, no_of_questions=temp.no_of_questions, attempts_allowed=temp.attempts_allowed, modified=datetime.datetime.now())
                 message = "Examination was successfully updated!"
-                return render(request ,'online_exam/faculty_modify_exam.html', {"message":message, "exams": exam_detail.objects.all()})
+                return render(request ,'online_exam/faculty_modify_exam.html', {"message":message, "exams": exam_detail.objects.filter(course_id__faculty=request.session.get('email'))})
             elif(exam_detail.objects.filter(exam_name=temp.exam_name, course_id = temp.course_id, year = temp.year).count() == 1 and list(exam_detail.objects.filter(exam_name=temp.exam_name, course_id = temp.course_id, year = temp.year).values("id"))[0]['id'] == int(request.POST['id'])):
                 exam_detail.objects.filter(id=temp.id).update(exam_name=temp.exam_name, description=temp.description, course_id=temp.course_id, year=temp.year, status=temp.status, start_time=temp.start_time, end_time=temp.end_time, pass_percentage=temp.pass_percentage, no_of_questions=temp.no_of_questions, attempts_allowed=temp.attempts_allowed, modified=datetime.datetime.now())
                 message = "Examination was successfully updated!"
-                return render(request ,'online_exam/faculty_modify_exam.html', {"message":message, "exams": exam_detail.objects.all()})
+                return render(request ,'online_exam/faculty_modify_exam.html', {"message":message, "exams": exam_detail.objects.filter(course_id__faculty=request.session.get('email'))})
             else:
                 wrong_message = "Sorry, exam already exists!"
-                return render(request ,'online_exam/faculty_modify_exam.html', {"wrong_message":wrong_message, "exams": exam_detail.objects.all()})
+                return render(request ,'online_exam/faculty_modify_exam.html', {"wrong_message":wrong_message, "exams": exam_detail.objects.filter(course_id__faculty=request.session.get('email'))})
         else:
             print("else entered")
-            return render(request ,'online_exam/faculty_modify_exam.html', {"exams":exam_detail.objects.all()})
+            return render(request ,'online_exam/faculty_modify_exam.html', {"exams":exam_detail.objects.filter(course_id__faculty=request.session.get('email'))})
     else:
         return redirect("..")
 def faculty_modify_topic(request):
@@ -434,7 +434,7 @@ def faculty_update_exam(request):
         end_date = ((str(result.end_time).split())[0])
         start_time = ((str(result.start_time).split())[1]).split("+")[0]
         end_time = ((str(result.end_time).split())[1]).split("+")[0]
-        return render(request ,'online_exam/faculty_update_exam.html', {"result": result, "courses": course.objects.all(), "start_date":start_date, "end_date":end_date, "start_time":start_time, "end_time":end_time})
+        return render(request ,'online_exam/faculty_update_exam.html', {"result": result, "courses": course.objects.filter(faculty=request.session.get('email')), "start_date":start_date, "end_date":end_date, "start_time":start_time, "end_time":end_time})
         #print("id---------------------------------------------------------", int(request.POST['id']))
     else:
         return redirect("..")
@@ -487,7 +487,7 @@ def faculty_update_question(request):
             ques['created'] = query.created
             ques['modified'] = query.modified
             ques['status'] = query.status
-            ques['courses'] = course.objects.all()
+            ques['courses'] = course.objects.filter(faculty=request.session.get('email'))
             ques['exams'] = exam_detail.objects.filter(course_id=query.exam_id.course_id).all()
             ques['question_types'] = question_type.objects.all()
         return render(request ,'online_exam/faculty_update_question.html', ques)
@@ -496,16 +496,16 @@ def faculty_update_question(request):
 
 def faculty_view_courses(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
-        return render(request ,'online_exam/faculty_view_courses.html', {"courses":course.objects.all()})
+        return render(request ,'online_exam/faculty_view_courses.html', {"courses":course.objects.filter(faculty=request.session.get('email'))})
     else:
         return redirect("..")
 
 @csrf_exempt
 def faculty_view_exams(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
-        data = exam_detail.objects.all()
+        data = exam_detail.objects.filter(course_id__faculty=request.session.get('email'))
         #print(data)
-        return render(request ,'online_exam/faculty_view_exams.html', {"exams":exam_detail.objects.all()})
+        return render(request ,'online_exam/faculty_view_exams.html', {"exams":exam_detail.objects.filter(course_id__faculty=request.session.get('email'))})
     else:
         return redirect("..")
 
@@ -567,7 +567,7 @@ def faculty_view_questions(request):
 
 def faculty_evaluate(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
-        temp = exam_detail.objects.all()
+        temp = exam_detail.objects.filter(course_id__faculty=request.session.get('email'))
         data=[]
         for t in temp:
             data1={}
@@ -1206,4 +1206,3 @@ def get_subtopics_by_topic(request):
             j += 1
         return HttpResponse(json.dumps(subtopics))
     return HttpResponseNotFound('<h1>Page not found</h1>')
-
