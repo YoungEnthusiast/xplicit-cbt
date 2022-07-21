@@ -381,7 +381,7 @@ def faculty_modify_question(request):
                 wrong_message = "Sorry, question already exists under the subtopic!!"
                 Final = {"wrong_message":wrong_message}
         V=[]
-        for i in question_bank.objects.all():
+        for i in question_bank.objects.filter(exam_id__course_id__faculty=request.session.get('email')):
             A = dict()
             A['id'] = i.id
             A['question'] = i.question
@@ -534,7 +534,7 @@ def faculty_view_subtopics(request):
 def faculty_view_questions(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
         V=[]
-        for i in question_bank.objects.all():
+        for i in question_bank.objects.filter(exam_id__course_id__faculty=request.session.get('email')):
             A = dict()
             A['question'] = i.question
             A['question_type'] = i.question_type.q_type
@@ -591,7 +591,7 @@ def faculty_exam_registrations(request):
             temp.registered=1-temp.registered
             temp.save()
             return HttpResponse(temp.registered)
-        temp=registration.objects.all()
+        temp=registration.objects.filter(exam_id__course_id__faculty=request.session.get('email'))
         data=[]
         for i in temp:
             data1={}
