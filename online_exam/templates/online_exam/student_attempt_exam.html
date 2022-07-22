@@ -281,7 +281,7 @@ desired effect
               </div>
             </div>
           </div>
-          <h5>Note: Please do not refresh the page or navigate during the examination</h5>
+          <!-- <h5>Note: Please do not refresh the page or navigate during the examination</h5> -->
         </div>
       </div>
     </section>
@@ -763,8 +763,8 @@ desired effect
               success:function(data){
                 sessionStorage.clear();
                 text = "";
-                text +="<h4>"+data+" marks.</h4>";
-                text +="<h5>Note: Only Multiple Choice answers and Match the Column have been corrected. The rest of the questions will be manually examined by the examiner and will be notified to you soon.</h5>";
+                // text +="<h4>"+data+" marks.</h4>";
+                text +="<h5>Your scores have been recorded. You will be able to view it through the progress section on your portal after it has been enabled by the examiner.</h5>";
                 text +="<br><a href='../student_exams'><button class='btn btn-primary'>Go to Examination Section</button></a>";
                 document.getElementById("score").innerHTML = text;
                 document.getElementById("navig-footer").innerHTML = "";
@@ -773,11 +773,11 @@ desired effect
               error: function (jqXHR, exception) {
                 var msg = '';
                 if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
+                    msg = 'Not connecting.\n Verify Network.';
                 } else if (jqXHR.status == 404) {
                     msg = 'Requested page not found. [404]';
                 } else if (jqXHR.status == 500) {
-                    msg = 'Internal Server Error [500].';
+                    msg = 'You have some questions yet to be answered! Please press F5 to refresh and return to exam.';
                 } else if (exception === 'parsererror') {
                     msg = 'Requested JSON parse failed.';
                 } else if (exception === 'timeout') {

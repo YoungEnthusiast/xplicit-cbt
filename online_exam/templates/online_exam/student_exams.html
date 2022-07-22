@@ -24,15 +24,17 @@
         -------------------------->
 
         {% if message %}
+            <br>
             <div class="callout callout-success">
               <p>{{message}}</p>
             </div>
         {% elif wrong_message %}
+            <br>
             <div class="callout callout-danger">
               <p>{{wrong_message}}</p>
             </div>
         {% endif %}
-            <a href="../student_approved_exams/"><button class = "btn btn-primary"><i class="fa fa-eye"></i> Approved Examinations</button></a>
+            <a href="../student_approved_exams/"><button class = "btn btn-xplicit-orange"><i class="fa fa-eye"></i> View Approved Examinations Here</button></a>
             <br>
             <br>
 

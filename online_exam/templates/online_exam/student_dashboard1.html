@@ -1,0 +1,152 @@
+{% extends 'online_exam/base_student.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Student's Dashboard</title>
+
+{% endblock title %}
+
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h4>
+      You're welcome, <strong class="text-xplicit-orange">{{request.session.first_name}}.</strong> Navigate through the portal using the left panel
+    </h4>
+    <ol class="breadcrumb">
+      <li><a href="active"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content container-fluid">
+
+    <!--------------------------
+      | Your Page Content Here |
+      -------------------------->
+      <div class = "container" style="width:100%">
+          <div class = "row">
+              <div class="col-lg-6">
+                  <div class="small-box bg-orange">
+                    <div class="inner">
+                      <h3>{{number_of_exams}}</h3>
+                      <p>Examinations</p>
+                    </div>
+                    <div class="icon">
+                      <i class="fa fa-check-square-o"></i>
+                    </div>
+                    <a href="../student_exams/" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="small-box bg-primary">
+                      <div class="inner">
+                        <h3>{{pass_percentage}}<sup style="font-size: 20px">%</sup></h3>
+
+                        <p>Current Percentage</p>
+                      </div>
+                      <div class="icon">
+                        <i class="fa fa-bar-chart"></i>
+                      </div>
+                      <a href="../student_progress" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+
+          </div>
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Progress</h3>
+                </div>
+                <div class="box-body">
+                    <div id="chart_div" style="height:300px"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">No. of examinations attended per month</h3>
+                    </div>
+                    <div class="box-body">
+                        <div id="chart_div_2" style="width: 100%; height: 300px;"></div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+  </section>
+</div>
+
+<script>
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawBackgroundColor);
+
+    function drawBackgroundColor() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Exam');
+          data.addColumn('number', 'Percentage');
+
+          data.addRows([
+            {% for i in performance %}
+              ["{{i.exam_name}}", {{i.percentage}}],
+            {% endfor %}
+            ]);
+
+          var options = {
+            hAxis: {
+              title: 'Percentage'
+            },
+            vAxis: {
+              title: 'Exams',
+              viewWindow: {
+                max:100,
+                min:0
+              }
+            },
+            backgroundColor: '#ffffff'
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        }
+</script>
+<script>
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawMultSeries);
+
+    function drawMultSeries() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('date', 'Month');
+          data.addColumn('number', 'Exams Given');
+
+          data.addRows([
+          {% for i in dataArray %}
+          [ new Date("{{i.year}}", "{{i.month}}", 1), {{i.count}}],
+        {% endfor %}
+          ]);
+
+          var options = {
+            title: 'Number of exams given per Month',
+            hAxis: {
+              title: 'Months of the Year',
+              format: 'MMM yyyy',
+            },
+            vAxis: {
+              title: 'Number of exams attended',
+              viewWindow: {
+                min:0
+              }
+            }
+          };
+
+          var chart = new google.visualization.ColumnChart(
+            document.getElementById('chart_div_2'));
+
+          chart.draw(data, options);
+        }
+</script>
+{% endblock content%}

@@ -785,7 +785,7 @@ def faculty_manual_evaluate(request):
                             subdata['answer'] += j.question + " - " + j.answer + "; "
                     else:
                         subdata['answer'] = answer.objects.get(question_id = i.question_id).answer
-                    subdata['level'] = i.question_id.level_id.level_name
+                    # subdata['level'] = i.question_id.level_id.level_name
                     subdata['score'] = i.question_id.score
                     subdata['gained_score'] = i.score
                     subdata['your_answers'] = i.answer
@@ -820,7 +820,7 @@ def faculty_manual_evaluate(request):
                         subdata['answer'] += j.question + " - " + j.answer + "; "
                 else:
                     subdata['answer'] = answer.objects.get(question_id = i.question_id).answer
-                subdata['level'] = i.question_id.level_id.level_name
+                # subdata['level'] = i.question_id.level_id.level_name
                 subdata['score'] = i.question_id.score
                 subdata['gained_score'] = i.score
                 subdata['your_answers'] = i.answer
@@ -1178,7 +1178,7 @@ def student_answer_key(request):
                     subdata['answer'] += j.question + " - " + j.answer + "; "
             else:
                 subdata['answer'] = answer.objects.get(question_id = i.question_id).answer
-            subdata['level'] = i.question_id.level_id.level_name
+            # subdata['level'] = i.question_id.level_id.level_name
             subdata['score'] = i.question_id.score
             subdata['gained_score'] = i.score
             subdata['your_answers'] = i.answer
