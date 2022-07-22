@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from . import views
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
     url(r'^faculty_dashboard/$', views.faculty_dashboard, name='faculty_dashboard'),
     url(r'^faculty_add_course/$', views.faculty_add_course, name='faculty_add_course'),
@@ -43,4 +45,11 @@ urlpatterns = [
     url(r'^authenticate/(?P<token>[A-Za-z0-9_\.-]*)/$', views.authenticate, name='authenticate'),
     url(r'^get_exams_by_course/$', views.get_exams_by_course, name='get_exams_by_course'),
     url(r'^get_subtopics_by_topic/$', views.get_subtopics_by_topic, name='get_subtopics_by_topic'),
+
+    url(r'^reset-password/$', auth_views.PasswordResetView.as_view(template_name='online_exam/reset_password.html'), name='reset_password'),
+    # path('reset-password-sent', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_sent.html'), name='password_reset_done'),
+    # path('reset-password/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_form.html'), name='password_reset_confirm'),
+    # path('reset-password-complete', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_done.html'), name='password_reset_complete'),
+
+
 ]

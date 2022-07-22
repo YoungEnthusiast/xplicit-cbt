@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'online_exam',
+    'django_filters',
+    'crispy_forms',
 ]
 SITE_ID = 1
 MIDDLEWARE = [
