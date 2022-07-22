@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>IIITS| Dashboard</title>
+  <title>Add Exam</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.css" %}">
@@ -183,7 +183,7 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../faculty_user_registrations"><i class="fa fa-users"></i>User Registrations</a></li>
+            <!-- <li><a href="../faculty_user_registrations"><i class="fa fa-users"></i>User Registrations</a></li> -->
             <li><a href="../faculty_exam_registrations"><i class="fa fa-drivers-license"></i>Exam Registrations</a></li>
             <li><a href="../faculty_evaluate"><i class="fa fa-check"></i>Evaluation</a></li>
           </ul>
@@ -200,9 +200,7 @@ desired effect
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Add Examinations
-      </h1>
+      <br>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-clipboard"></i>Examinations</a></li>
         <li class="active"><i class="fa fa-plus"></i> Add Examinations</li>
@@ -309,11 +307,11 @@ desired effect
                   <label for="inputPassPercentage" class="col-sm-2 control-label">Pass percentage</label>
 
                   <div class="col-sm-2">
-                    <input class="form-control" id="inputPassPercentage" placeholder="%" type="text" name="pass_percentage" required>
+                    <input class="form-control" id="inputPassPercentage" placeholder="number" type="text" name="pass_percentage" required>
                   </div>
                   <label for="inputMaxNoOfQuestions" class="col-sm-2 control-label">Max No. Of Questions</label>
                   <div class="col-sm-2">
-                    <input class="form-control" id="inputMaxNoOfQuestions" placeholder="Max Qs" type="text" name="no_of_questions" required>
+                    <input class="form-control" id="inputMaxNoOfQuestions" placeholder="number" type="text" name="no_of_questions" required>
                   </div>
                   <label for="inputAttemptsAllowed" class="col-sm-2 control-label">Attempts Allowed</label>
                   <div class="col-sm-2">

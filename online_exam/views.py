@@ -10,13 +10,17 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from django.db.models import Sum
 # import requests
-from .models import course, user, question_type, exam_detail, question_bank,  option, answer, registration, result
+from .models import course, user, question_type, exam_detail, question_bank,  option, answer, registration, result, MatchTheColumns
+
 # from .models import course, user, topic, subtopic, question_type, level, exam_detail, question_bank,  option, answer, registration, result, MatchTheColumns
 
 def faculty_dashboard(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
         registrations = []
-        for i in registration.objects.values("exam_id").distinct():
+        for i in registration.objects.filter(exam_id__course_id__faculty=request.session.get('email')).values("exam_id").distinct():
+
+        # for i in registration.objects.values("exam_id").distinct():
+
             regis = dict()
             regis["exam_name"] = exam_detail.objects.get(pk = i["exam_id"]).exam_name
             regis["count"] = registration.objects.filter(exam_id = i["exam_id"]).count()
@@ -56,9 +60,56 @@ def faculty_dashboard(request):
             pass_percentage = 0
         else:
             pass_percentage = round((pass_p*100/count),2)
-        return render(request ,'online_exam/faculty_dashboard.html', {"num_of_users":user.objects.count(), "num_of_exams":exam_detail.objects.count(), "num_of_questions":question_bank.objects.count(), "registrations":registrations, "dataArray":dataArray, "pass_percentage":pass_percentage})
+        return render(request ,'online_exam/faculty_dashboard.html', {"num_of_users":user.objects.count(), "num_of_exams":exam_detail.objects.filter(course_id__faculty=request.session.get('email')).count(), "num_of_questions":question_bank.objects.filter(exam_id__course_id__faculty=request.session.get('email')).count(), "registrations":registrations, "dataArray":dataArray, "pass_percentage":pass_percentage})
     else:
         return redirect("..")
+
+# def faculty_dashboard(request):
+#     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 0):
+#         registrations = []
+#         for i in registration.objects.values("exam_id").distinct():
+#             regis = dict()
+#             regis["exam_name"] = exam_detail.objects.get(pk = i["exam_id"]).exam_name
+#             regis["count"] = registration.objects.filter(exam_id = i["exam_id"]).count()
+#             registrations.append(regis)
+#         now = datetime.datetime.now()
+#         curr = str(now.year) + "-" + str(now.month) + "-01"
+#         curr_year = int(now.year)
+#         curr_month = int(now.month)
+#         dataArray = []
+#         for i in range(0, 6):
+#             if(curr_month-i <= 0):
+#                 curr_year -= 1
+#                 curr_month += 12
+#             curr_array = dict()
+#             curr_array["year"] = curr_year
+#             curr_array["month"] = curr_month - i -1
+#             if(curr_month - i != 12):
+#                 curr_array["count"] = user.objects.filter(created__range = (datetime.date(curr_year, curr_month-i, 1), datetime.date(curr_year, curr_month-i + 1, 1))).count()
+#             else:
+#                 curr_array["count"] = user.objects.filter(created__range = (datetime.date(curr_year, 12, 1), datetime.date(curr_year+1, 1, 1))).count()
+#             dataArray.append(curr_array)
+#         pass_p = 0
+#         count = 0
+#         for i in registration.objects.filter(answered=1).all():
+#             gained_score = result.objects.filter(registration_id = i).aggregate(Sum('score'))
+#             if(gained_score['score__sum'] == None):
+#                 gained_score = 0
+#             else:
+#                 gained_score = int(gained_score['score__sum'])
+#             total_score = 0
+#             for j in result.objects.filter(registration_id = i).all():
+#                 total_score += j.question_id.score
+#             if(gained_score >= i.exam_id.pass_percentage*total_score/100):
+#                 pass_p += 1
+#             count += 1
+#         if(count == 0):
+#             pass_percentage = 0
+#         else:
+#             pass_percentage = round((pass_p*100/count),2)
+#         return render(request ,'online_exam/faculty_dashboard.html', {"num_of_users":user.objects.count(), "num_of_exams":exam_detail.objects.filter(course_id__faculty=request.session.get('email')).count(), "num_of_questions":question_bank.objects.count(), "registrations":registrations, "dataArray":dataArray, "pass_percentage":pass_percentage})
+#     else:
+#         return redirect("..")
 
 @csrf_exempt
 def faculty_add_course(request):
@@ -227,7 +278,7 @@ def faculty_modify_course(request):
             temp.course_id = request.POST['id']
             temp.course_name = request.POST['course_name']
             temp.description = request.POST['description']
-            temp.faculty = request.POST['faculty']
+            temp.faculty = request.session.get('email')
             temp.status = request.POST['status']
             if(course.objects.filter(course_name=temp.course_name).count() == 0 ):
                 course.objects.filter(id=temp.course_id).update(course_name=temp.course_name, description = temp.description, status = temp.status, modified = datetime.datetime.now())
@@ -917,7 +968,7 @@ def student_attempt_exam(request):
             else:
                 L['options'] = ""
             #L['answer'] = dict(answer.objects.filter(question_id = i.id).values("answer"))
-            if(i.question_type.id == 5):
+            if(i.question_type.id == 6):
                 m = 1
                 L['mtcQuestions'] = dict()
                 L['mtcAnswers'] = dict()
@@ -928,9 +979,6 @@ def student_attempt_exam(request):
                 for l in MatchTheColumns.objects.filter(question_id = i).order_by('?').all():
                     L['mtcAnswers'][m] = l.answer
                     m += 1
-            L['level'] = i.level_id.level_name
-            L['subtopic'] = i.subtopic_id.subtopic_name
-            L['topic'] = i.subtopic_id.topic_id.topic_name
             L['score'] = i.score
             L['exam'] = i.exam_id.exam_name
             exam_id = i.exam_id.id
@@ -944,6 +992,54 @@ def student_attempt_exam(request):
         return render(request, 'online_exam/student_attempt_exam.html', {"myArray":final, "sizeMyArray":j, "exam_id":exam_id, "registration_id":registration_id, "seconds": seconds})
     else:
         return redirect("..")
+
+# def student_attempt_exam(request):
+#     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1 and request.POST.get('registration_id', False) != False and request.POST.get('exam_id', False) != False):
+#         questions = question_bank.objects.filter(exam_id = exam_detail.objects.get(id = int(request.POST['exam_id']))).all()
+#         K = dict()
+#         registration_id = request.POST['registration_id']
+#         exam_id = ""
+#         j = 0
+#         for i in questions:
+#             L = dict()
+#             L['question_id'] = i.id
+#             L['question'] = i.question
+#             L['question_type'] = i.question_type.q_type
+#             if(i.question_type.id == 1 or i.question_type.id == 2):
+#                 opt_dict = dict()
+#                 for k in option.objects.filter(question_id = i.id):
+#                     opt_dict[k.option_no] = k.option_value
+#                 L['options'] = opt_dict
+#             else:
+#                 L['options'] = ""
+#             #L['answer'] = dict(answer.objects.filter(question_id = i.id).values("answer"))
+#             if(i.question_type.id == 5):
+#                 m = 1
+#                 L['mtcQuestions'] = dict()
+#                 L['mtcAnswers'] = dict()
+#                 for l in MatchTheColumns.objects.filter(question_id = i).all():
+#                     L['mtcQuestions'][m] = l.question
+#                     m += 1
+#                 m = 1
+#                 for l in MatchTheColumns.objects.filter(question_id = i).order_by('?').all():
+#                     L['mtcAnswers'][m] = l.answer
+#                     m += 1
+#             L['level'] = i.level_id.level_name
+#             L['subtopic'] = i.subtopic_id.subtopic_name
+#             L['topic'] = i.subtopic_id.topic_id.topic_name
+#             L['score'] = i.score
+#             L['exam'] = i.exam_id.exam_name
+#             exam_id = i.exam_id.id
+#             L['course'] = i.exam_id.course_id.course_name
+#             j += 1
+#             K[j] = L
+#         final = json.dumps(K)
+#         a = datetime.datetime.now()
+#         b = datetime.datetime(i.exam_id.end_time.year,i.exam_id.end_time.month,i.exam_id.end_time.day,i.exam_id.end_time.hour + 1,i.exam_id.end_time.minute,i.exam_id.end_time.second)
+#         seconds = math.floor((b-a).total_seconds())
+#         return render(request, 'online_exam/student_attempt_exam.html', {"myArray":final, "sizeMyArray":j, "exam_id":exam_id, "registration_id":registration_id, "seconds": seconds})
+#     else:
+#         return redirect("..")
 def student_approved_exams(request):
     if(request.session.get('id', False) != False and request.session.get('account_type', False) == 1):
         Final = []

@@ -175,7 +175,7 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../faculty_user_registrations"><i class="fa fa-users"></i>User Registrations</a></li>
+            <!-- <li><a href="../faculty_user_registrations"><i class="fa fa-users"></i>User Registrations</a></li> -->
             <li><a href="../faculty_exam_registrations"><i class="fa fa-drivers-license"></i>Exam Registrations</a></li>
             <li><a href="../faculty_evaluate"><i class="fa fa-check"></i>Evaluation</a></li>
           </ul>
@@ -192,9 +192,7 @@ desired effect
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Update Course
-      </h1>
+      <br>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-book"></i>Courses</a></li>
         <li><a href="../faculty_modify_course"><i class="fa fa-pencil"></i>Modify Course</a></li>
@@ -214,7 +212,7 @@ desired effect
         <div class="col-lg-7">
         <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Modify Course</h3>
+              <h3 class="box-title">Update Course</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -229,14 +227,11 @@ desired effect
 
                 <div class="form-group">
                   <div class="col-sm-12">
-                    <input class="form-control" id="inputDescription" name="description" value="{{ data.description }}" type="text">
+                    <input class="form-control" id="inputDescription" placeholder="Description (You may leave blank)" name="description" value="{{ data.description }}" type="text">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <div class="col-sm-6">
-                    <input class="form-control" name="faculty" id="inputFaculty" value="{{ data.faculty }}" type="text" required>
-                  </div>
                   <div class="col-sm-6">
                     <select class="form-control" name="status" required>
                     {% if data.status == 1 %}
@@ -253,7 +248,7 @@ desired effect
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-info pull-right">Modify course</button>
+                <button type="submit" class="btn btn-info pull-right">OK</button>
               </div>
               <!-- /.box-footer -->
             </form>
